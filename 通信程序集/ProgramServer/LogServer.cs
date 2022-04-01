@@ -1,12 +1,19 @@
-﻿using System.Net;
+﻿using Server;
+using System.Net;
 using System.Net.Sockets;
 
-namespace MyServer
+namespace Server
 {
     internal class LogServer : ServerBase
     {
-        internal LogServer(IPAddress listenIp, int port, string LogName) : base(listenIp, port)
+        /// <summary>
+        /// log文件夹
+        /// </summary>
+        public readonly string LogFloder;
+        
+        internal LogServer(IPAddress listenIp, int port, string logPath) : base(listenIp, port)
         {
+            LogFloder = logPath;
         }
 
         internal override void Service(object? obj)
@@ -22,15 +29,14 @@ namespace MyServer
             int index = BitConverter.ToInt32(indexByte);
             
             //接收文件
-            using var output = File.Create($"log_{index}.log");
-            var buffer = new byte[4096];
+            using var output = File.Create(Path.Combine(LogFloder,$"log_{index}.log"));
+            var buffer = new byte[1500];
             while ((byteRead = socket.Receive(buffer)) > 0)
             {
                 output.Write(buffer, 0, byteRead);
             }
 
             socket.Shutdown(SocketShutdown.Both);
-            output.Close();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 
-namespace MyServer
+namespace Server
 {
     internal class RtcServer : ServerBase
     {
@@ -9,6 +9,9 @@ namespace MyServer
         {
         }
 
+        /// <summary>
+        /// 发送UnixEpoch到现在的秒数
+        /// </summary>
         internal override void Service(object? socketObj)
         {
             using Socket socket = (Socket)socketObj!;

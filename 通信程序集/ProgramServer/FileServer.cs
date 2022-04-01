@@ -1,10 +1,14 @@
 ﻿using System.Net;
 using System.Net.Sockets;
-namespace MyServer
+namespace Server
 {
     internal class FileServer : ServerBase
     {
-        public readonly string? FileName;
+        
+        /// <summary>
+        /// 待发送文件路径
+        /// </summary>
+        public readonly string FileName;
 
         internal FileServer(IPAddress listenIp, int port, string fileName)
             : base(listenIp, port)
@@ -16,6 +20,7 @@ namespace MyServer
         {
             using Socket socket = (Socket)socketObj!;
             socket.SendFile(FileName);
+            socket.Shutdown(SocketShutdown.Both);
         }
     }
 }
