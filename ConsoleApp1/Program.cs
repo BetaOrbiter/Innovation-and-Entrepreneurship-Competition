@@ -1,8 +1,4 @@
 ﻿using Hardware.Info;
-using System.Media;
-System.Media.SystemSounds.Beep.Play();
-
-
 //System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\李洲诚\Music\08 前前前世 (movie ver.).flac");
 //player.Play();
 
@@ -37,26 +33,26 @@ Hardware.RefreshDriveList();
 foreach (var drive in Hardware.DriveList)
 {
     Console.WriteLine(drive.Caption);
-    Console.WriteLine(drive.Description);
-    Console.WriteLine(drive.FirmwareRevision);
-    Console.WriteLine(drive.Index);
-    Console.WriteLine(drive.Manufacturer);
-    Console.WriteLine(drive.Model);
-    Console.WriteLine(drive.Name);
-    Console.WriteLine(drive.SerialNumber);
-    Console.WriteLine(drive.Size);
-    Console.WriteLine(drive.Partitions);
+    //Console.WriteLine(drive.Description);
+    //Console.WriteLine(drive.FirmwareRevision);
+    //Console.WriteLine(drive.Index);
+    //Console.WriteLine(drive.Manufacturer);
+    //Console.WriteLine(drive.Model);
+    //Console.WriteLine(drive.Name);
+    //Console.WriteLine(drive.SerialNumber);
+    //Console.WriteLine(drive.Size);
+    //Console.WriteLine(drive.Partitions);
     foreach (var partion in drive.PartitionList)
     {
-        Console.WriteLine(partion.Index);
-        Console.WriteLine(partion.Name);
-        Console.WriteLine(partion.Description);
+        //Console.WriteLine(partion.Index);
+        //Console.WriteLine(partion.Name);
+        //Console.WriteLine(partion.Description);
         foreach (var v in partion.VolumeList)
         {
-            Console.WriteLine(v.VolumeName);
-            Console.WriteLine(v.Description);
+            //Console.WriteLine(v.VolumeName);
+            //Console.WriteLine(v.Description);
             Console.WriteLine(v.Name);
-            Console.WriteLine(v.Caption);
+            //Console.WriteLine(v.Caption);
         }
     }
     Console.Write(Environment.NewLine);

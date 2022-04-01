@@ -3,8 +3,8 @@
 namespace MyTool
 {
     /// <summary>
-    /// 一个Process的wrapper,方便指定一些属性<br/>
-    /// 调用位于ExcutablePath处的外部可执行程序进行压力测试<br/>
+    /// 一个<see cref="Process"/>的wrapper,方便指定一些属性<br/>
+    /// 调用位于<see cref="ExcutablePath"/>处的外部可执行程序进行压力测试<br/>
     /// 调用者可指定测试时间和测试线程数
     /// </summary>
     public abstract class StresserBase
