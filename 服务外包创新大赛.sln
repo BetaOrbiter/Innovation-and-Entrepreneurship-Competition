@@ -36,13 +36,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlProfileParser", "压力�
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlResultParser", "压力测试包\diskspd\diskspd_vs\XmlResultParser\XmlResultParser.vcxproj", "{60A28E9C-C245-4D99-9C1C-EC911031743F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "通信程序集", "通信程序集", "{C1A9625A-8223-4E6C-8C28-DE8C44AB9C06}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "通信程序集\ProgramServer\Server.csproj", "{EEEB26A7-852A-4D34-A65C-DBC79076EAA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "下载器", "通信程序集\下载器\下载器.csproj", "{855FFCA7-14FF-44B8-A1EA-D712A2FD387F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "下载器", "通信程序集\下载器\下载器.csproj", "{855FFCA7-14FF-44B8-A1EA-D712A2FD387F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{612314A7-326F-4A6D-8876-584DE9BCF9C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -198,18 +198,6 @@ Global
 		{60A28E9C-C245-4D99-9C1C-EC911031743F}.Release|x64.Build.0 = Release|x64
 		{60A28E9C-C245-4D99-9C1C-EC911031743F}.Release|x86.ActiveCfg = Release|Win32
 		{60A28E9C-C245-4D99-9C1C-EC911031743F}.Release|x86.Build.0 = Release|Win32
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Debug|x64.Build.0 = Debug|Any CPU
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Debug|x86.Build.0 = Debug|Any CPU
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Release|x64.ActiveCfg = Release|Any CPU
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Release|x64.Build.0 = Release|Any CPU
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Release|x86.ActiveCfg = Release|Any CPU
-		{2C2BAEDB-F18E-4ECC-9F07-F524444E88B4}.Release|x86.Build.0 = Release|Any CPU
 		{EEEB26A7-852A-4D34-A65C-DBC79076EAA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EEEB26A7-852A-4D34-A65C-DBC79076EAA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEEB26A7-852A-4D34-A65C-DBC79076EAA5}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -234,6 +222,18 @@ Global
 		{855FFCA7-14FF-44B8-A1EA-D712A2FD387F}.Release|x64.Build.0 = Release|Any CPU
 		{855FFCA7-14FF-44B8-A1EA-D712A2FD387F}.Release|x86.ActiveCfg = Release|Any CPU
 		{855FFCA7-14FF-44B8-A1EA-D712A2FD387F}.Release|x86.Build.0 = Release|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Debug|x64.Build.0 = Debug|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Debug|x86.Build.0 = Debug|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Release|x64.ActiveCfg = Release|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Release|x64.Build.0 = Release|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Release|x86.ActiveCfg = Release|Any CPU
+		{612314A7-326F-4A6D-8876-584DE9BCF9C4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

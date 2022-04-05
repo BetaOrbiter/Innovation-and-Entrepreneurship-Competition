@@ -1,6 +1,6 @@
 ﻿using LibreHardwareMonitor.Hardware;
 
-namespace MyTool
+namespace MyTool.Monitor
 {
     internal class UpdateVisitor : IVisitor
     {

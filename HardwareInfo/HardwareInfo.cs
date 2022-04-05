@@ -10,7 +10,35 @@ namespace Hardware.Info
         /// <summary>
         /// 硬盘smart信息,与其他信息来自不同包故用法不同
         /// </summary>
-        public DriveCollection? DrivesSMARTs { get; }
+        public DriveCollection? DrivesSMARTs { get; init; }
+
+        /// <summary>
+        /// <see cref="HardwareInfo.DriveList"/>的非USB硬盘子集(浅拷贝)<br/>
+        /// 每次访问该属性均会浅拷贝并过滤<see cref="HardwareInfo.DriveList"/>
+        /// </summary>
+        public List<Drive> DiskList
+        {
+            get
+            {
+                var shadowList = DriveList.GetRange(0, DriveList.Count);
+                shadowList.RemoveAll(drive => !drive.Name.ToLower().Contains("usb"));
+                return shadowList;
+            }
+        }
+        
+        /// <summary>
+        /// <see cref="HardwareInfo.DriveList"/>的USB硬盘子集(浅拷贝)<br/>
+        /// 每次访问该属性均会浅拷贝并过滤<see cref="HardwareInfo.DriveList"/>
+        /// </summary>
+        public List<Drive> UsbDsikList
+        {
+            get
+            {
+                var shadowList = DriveList.GetRange(0, DriveList.Count);
+                shadowList.RemoveAll(drive => drive.Name.ToLower().Contains("usb"));
+                return shadowList;
+            }
+        }
 
         public HardwareInformation() : base()
         {
