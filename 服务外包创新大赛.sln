@@ -42,6 +42,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "通信程序集\P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "下载器", "通信程序集\下载器\下载器.csproj", "{855FFCA7-14FF-44B8-A1EA-D712A2FD387F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "UI\UI.csproj", "{8EE66A6E-6BF3-4476-82A2-748C630F6E3E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{612314A7-326F-4A6D-8876-584DE9BCF9C4}"
 EndProject
 Global
