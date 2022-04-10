@@ -17,9 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HardwareInfo\HardwareInfo.csproj" />
+    <ProjectReference Include="..\Controller\Controller.csproj" />
     <ProjectReference Include="..\Monitor\Monitor.csproj" />
-    <ProjectReference Include="..\压力测试包\Stresser\Stresser.csproj" />
   </ItemGroup>
 
   <ItemGroup>

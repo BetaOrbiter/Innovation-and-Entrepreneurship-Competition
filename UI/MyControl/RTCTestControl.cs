@@ -58,10 +58,10 @@ namespace UI.MyControl
                 StringFormat stringFormat = new StringFormat();
                 stringFormat.Alignment = StringAlignment.Near;
                 stringFormat.LineAlignment = StringAlignment.Near;
-                Font font = new Font("Segoe Print", 18, FontStyle.Regular);
+                Font font = new Font("宋体", 20, FontStyle.Regular);
                 g.DrawString("RTC测试", font, brush, rectangle, stringFormat);
                 font.Dispose();
-                font= new Font("Segoe Print", 12, FontStyle.Regular);
+                font= new Font("宋体", 12, FontStyle.Regular);
                 stringFormat.Alignment = StringAlignment.Near;
                 stringFormat.LineAlignment = StringAlignment.Center;
                 g.DrawString("终端时间 "+terminalTime.ToString(), font, brush, rectangle, stringFormat);

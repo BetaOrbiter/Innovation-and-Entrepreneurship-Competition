@@ -28,18 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.CPUMessageChart = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
+            this.CPUUseRateChart = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
             this.CPUThermometer = new UI.MyThermometer();
             this.fanPictureBox = new System.Windows.Forms.PictureBox();
+            this.progressBar = new ReaLTaiizor.Controls.AloneProgressBar();
+            this.progressLabel = new ReaLTaiizor.Controls.BigLabel();
             ((System.ComponentModel.ISupportInitialize)(this.fanPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // CPUMessageChart
+            // CPUUseRateChart
             // 
-            this.CPUMessageChart.Location = new System.Drawing.Point(0, 89);
-            this.CPUMessageChart.Name = "CPUMessageChart";
-            this.CPUMessageChart.Size = new System.Drawing.Size(407, 239);
-            this.CPUMessageChart.TabIndex = 1;
+            this.CPUUseRateChart.Location = new System.Drawing.Point(0, 89);
+            this.CPUUseRateChart.Name = "CPUUseRateChart";
+            this.CPUUseRateChart.Size = new System.Drawing.Size(407, 239);
+            this.CPUUseRateChart.TabIndex = 1;
             // 
             // CPUThermometer
             // 
@@ -79,14 +81,45 @@
             this.fanPictureBox.TabIndex = 5;
             this.fanPictureBox.TabStop = false;
             // 
+            // progressBar
+            // 
+            this.progressBar.BackColor = System.Drawing.SystemColors.Control;
+            this.progressBar.BackgroundColor = System.Drawing.Color.Green;
+            this.progressBar.BorderColor = System.Drawing.Color.DodgerBlue;
+            this.progressBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.progressBar.Location = new System.Drawing.Point(0, 20);
+            this.progressBar.Maximum = 100;
+            this.progressBar.Minimum = 0;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(743, 10);
+            this.progressBar.Stripes = System.Drawing.Color.DarkGreen;
+            this.progressBar.TabIndex = 6;
+            this.progressBar.Text = "aloneProgressBar1";
+            this.progressBar.Value = 0;
+            // 
+            // progressLabel
+            // 
+            this.progressLabel.BackColor = System.Drawing.Color.Transparent;
+            this.progressLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.progressLabel.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.progressLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.progressLabel.Location = new System.Drawing.Point(0, 0);
+            this.progressLabel.Name = "progressLabel";
+            this.progressLabel.Size = new System.Drawing.Size(743, 20);
+            this.progressLabel.TabIndex = 7;
+            this.progressLabel.Text = "测试进度0%";
+            this.progressLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // CPUBurner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(246)))));
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.progressLabel);
             this.Controls.Add(this.fanPictureBox);
             this.Controls.Add(this.CPUThermometer);
-            this.Controls.Add(this.CPUMessageChart);
+            this.Controls.Add(this.CPUUseRateChart);
             this.Name = "CPUBurner";
             this.Size = new System.Drawing.Size(743, 586);
             ((System.ComponentModel.ISupportInitialize)(this.fanPictureBox)).EndInit();
@@ -95,8 +128,10 @@
         }
 
         #endregion
-        private LiveChartsCore.SkiaSharpView.WinForms.CartesianChart CPUMessageChart;
+        private LiveChartsCore.SkiaSharpView.WinForms.CartesianChart CPUUseRateChart;
         private MyThermometer CPUThermometer;
         private PictureBox fanPictureBox;
+        private ReaLTaiizor.Controls.AloneProgressBar progressBar;
+        private ReaLTaiizor.Controls.BigLabel progressLabel;
     }
 }

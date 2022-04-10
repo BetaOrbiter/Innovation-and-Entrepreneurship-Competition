@@ -9,15 +9,17 @@ namespace UnitTestProject
     public class MonitorTest
     {
         private const int cpuNumber = 1;
-        private const int corePerCpu = 4;
+        private const int corePerCpu = 6;
         private const int DriveNumber = 1;
         private const int fanNumber = 1;
-        private const int networkNumber = 5;
+        private const int networkNumber = 2;
 
         [TestMethod]
         public void TestNetAdapterMonitor()
         {
             Assert.IsNotNull(ComputerMonitor.NetAdapterMonitorList);
+            foreach (var i in ComputerMonitor.NetAdapterMonitorList)
+                Console.WriteLine(i.Name);
             Assert.AreEqual(networkNumber, ComputerMonitor.NetAdapterMonitorList.Count);
             foreach (var network in ComputerMonitor.NetAdapterMonitorList)
             {

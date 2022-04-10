@@ -112,21 +112,22 @@ namespace UI
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
            
-            using (Pen pen = new Pen(Color.Black))
-            {
-                g.DrawLine(pen, 0, this.Height - 1, this.Width, this.Height - 1);
-            }
+            //using (Pen pen = new Pen(Color.Black))
+            //{
+            //    g.DrawLine(pen, 0, this.Height - 1, this.Width, this.Height - 1);
+            //}
             using (Brush brush = new SolidBrush(Color.Black))
             {
                 StringFormat stringFormat = new StringFormat();
                 stringFormat.Alignment = StringAlignment.Near;
                 stringFormat.LineAlignment = StringAlignment.Near;
-                Font font = new Font("Segoe Print", 25, FontStyle.Regular);
+                Font font = new Font("宋体", 25, FontStyle.Regular);
                 g.DrawString(text+" "+ diskNumber, font, brush, rectangle, stringFormat);
-                font = new Font("Segoe Print", 15, FontStyle.Regular);
+                font.Dispose();
+                font = new Font("宋体", 15, FontStyle.Regular);
                 stringFormat.LineAlignment = StringAlignment.Far;
                 stringFormat.Alignment = StringAlignment.Far;
-                g.DrawString(diskModel, font, brush, rectangle, stringFormat);
+                g.DrawString("型号 "+diskModel, font, brush, rectangle, stringFormat);
                 rectangle.Location = new(this.Width * 1 / 2, this.Height / 3);
                 rectangle.Size = new(this.Width * 1 / 3, this.Height * 4 / 5);
                 stringFormat.LineAlignment = StringAlignment.Near;
@@ -134,7 +135,7 @@ namespace UI
                 g.DrawString("读取速度 "+readSpeed+"KB/s", font, brush, rectangle, stringFormat);
                 stringFormat.LineAlignment = StringAlignment.Center;
                 g.DrawString("写入速度 " + writeSpeed + "KB/s", font, brush, rectangle, stringFormat);
-
+                font.Dispose();
             }
         }
     }

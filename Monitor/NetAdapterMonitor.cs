@@ -15,6 +15,7 @@ namespace MyTool.Monitor
         /// <param name="milionSecond"></param>
         public void Update(int milionSecond = 100)
         {
+
             lock (_networkAdapter)
             {
                 _networkAdapter.Update();

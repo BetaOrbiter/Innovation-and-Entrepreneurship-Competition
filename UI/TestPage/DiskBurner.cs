@@ -33,7 +33,7 @@ namespace UI.TestPage
                     diskControls[i].Text = "硬盘";
                     diskControls[i].Size = new(this.Width-30, 250);
                     diskControls[i].DiskNumber = i;
-                    diskControls[i].Parent = this;
+                    diskControls[i].Parent = this.diskPanel;
                     diskControls[i].Show();
                 }
                 Refresh();
@@ -46,10 +46,6 @@ namespace UI.TestPage
            
 
         }
-        protected override void OnSizeChanged(EventArgs e)
-        {
-            base.OnSizeChanged(e);
-            
-        }
+       
     }
 }

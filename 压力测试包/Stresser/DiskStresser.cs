@@ -35,10 +35,11 @@
         /// </summary>
         /// <param name="executablePath">可执行文件路径</param>
         /// <param name="testFilePathes">目标文件路径</param>
-        public DiskStresser(string executablePath, List<string> testFilePathes)
+        public DiskStresser(string executablePath, List<string> testFilePathes, int stressTime = 60 * 60 * 3)
             :base(executablePath)
         {
             TestFilePathes = testFilePathes;
+            StressTime = stressTime;
         }
 
         protected override void SetArguments()

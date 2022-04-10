@@ -14,7 +14,7 @@ namespace UI.MyControl
     {
         private int diskIndex;
         private string diskModel;
-        private int diskCapacity;
+        private ulong diskCapacity;
         private int status;
         private string task;
         private Image image = Properties.Resources.disk;
@@ -42,7 +42,7 @@ namespace UI.MyControl
                 Invalidate();
             }
         }
-        public int DiskCapactiy
+        public ulong DiskCapacity
         {
             get
             {
@@ -71,7 +71,7 @@ namespace UI.MyControl
                 else if (status == 1)
                 {
                     this.BackColor = Color.LightGray;
-                    this.task = "坏道检测";
+                    this.task = "检测中";
                 }
                 else if (status == 2)
                 {
@@ -101,7 +101,7 @@ namespace UI.MyControl
         {
             base.OnPaint(e);
             Graphics g = e.Graphics;
-            Rectangle rectangle = new Rectangle(0, 0, this.Width * 2 / 5, this.Height);
+            Rectangle rectangle = new Rectangle(0, this.Height*1/5, this.Width * 2 / 5, this.Height*4/5);
             rectangle.Inflate(-5, -5);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
@@ -109,7 +109,7 @@ namespace UI.MyControl
             g.DrawImage(image, dstRect);
             using (Brush brush = new SolidBrush(Color.Black))
             {
-                rectangle = new Rectangle(this.Width * 2 / 5, 0, this.Width * 3 / 5, this.Height);
+                rectangle = new Rectangle(0, 0, this.Width, this.Height*1/5);
                 rectangle.Inflate(-5, -5);
                 StringFormat stringFormat = new StringFormat();
                 stringFormat.Alignment = StringAlignment.Near;
@@ -117,13 +117,22 @@ namespace UI.MyControl
                 using(Font font=new Font("宋体",20,FontStyle.Regular))
                 {
                     g.DrawString("硬盘 "+diskIndex, font, brush, rectangle, stringFormat);
+                    
                 }
+                stringFormat.Alignment = StringAlignment.Far;
+                using (Font font=new Font("宋体", 12, FontStyle.Regular))
+                {
+                    g.DrawString("\n"+diskModel, font, brush, rectangle, stringFormat);
+                }
+                stringFormat.Alignment = StringAlignment.Near;
                 stringFormat.LineAlignment = StringAlignment.Center;
+                rectangle = new Rectangle(this.Width * 2 / 5, 0, this.Width * 3 / 5, this.Height);
+                
                 using (Font font = new Font("宋体", 12, FontStyle.Regular))
                 {
-                    g.DrawString("型号:"+diskModel, font, brush, rectangle, stringFormat);
-                    g.DrawString("\n\n容量:" + diskCapacity, font, brush, rectangle, stringFormat);
-                    g.DrawString("\n\n\n\n测试状态:" + task, font, brush, rectangle, stringFormat);
+                    
+                    g.DrawString("容量:" + diskCapacity+"GB", font, brush, rectangle, stringFormat);
+                    g.DrawString("\n\n\n测试状态:" + task, font, brush, rectangle, stringFormat);
                 }
             }
 

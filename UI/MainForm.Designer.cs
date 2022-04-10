@@ -176,7 +176,7 @@
             this.StopButton.Size = new System.Drawing.Size(50, 50);
             this.StopButton.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             this.StopButton.TabIndex = 2;
-            this.StopButton.Text = "停止";
+            this.StopButton.Text = "开始";
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // NowTestItem
@@ -214,6 +214,7 @@
             // 
             // testPageCard
             // 
+            this.testPageCard.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.testPageCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.testPageCard.Location = new System.Drawing.Point(256, 130);
             this.testPageCard.Margin = new System.Windows.Forms.Padding(0);
@@ -298,6 +299,8 @@
             this.Text = "AutoMaticx86";
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.BaseForm.ResumeLayout(false);
             this.MainLayout.ResumeLayout(false);
             this.TitlePanel.ResumeLayout(false);

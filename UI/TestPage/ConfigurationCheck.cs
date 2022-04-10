@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hardware.Info;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,19 +16,20 @@ namespace UI.TestPage
     {
         private DateTime terminalTime;
         private DateTime configurationTime;
-        private string terminalCPUModel;
-        private string configurationCPUModel;
+        private List<string> terminalCPUModel;
+        private List<string> configurationCPUModel;
         private List<string> terminalMemoryModels;
         private List<string> configurationMemoryModels;
-        private string terminalGPUModel;
-        private string configurationGPUModel;
+        private List<string> terminalGPUModel;
+        private List<string> configurationGPUModel;
         private List<string> terminalDiskModels;
         private List<string> configurationDiskModels;
-        RTCTestControl rtcTextControl;
-        ModelCheckControl cpuCheckControl;
-        ModelsCheckControl memoryCheckControl;
-        ModelCheckControl gpuCheckControl;
-        ModelsCheckControl diskCheckControl;
+
+        private RTCTestControl rtcTextControl;
+        private ModelsCheckControl cpuCheckControl;
+        private ModelsCheckControl memoryCheckControl;
+        private ModelsCheckControl gpuCheckControl;
+        private ModelsCheckControl diskCheckControl;
         public DateTime TerminalTime
         {
             get
@@ -60,7 +62,7 @@ namespace UI.TestPage
                 Refresh();
             }
         }
-        public string TerminalCPUModel
+        public List<string> TerminalCPUModel
         {
             get
             {
@@ -71,7 +73,7 @@ namespace UI.TestPage
                 terminalCPUModel = value;
             }
         }
-        public string ConfigurationCPUModel
+        public List<string> ConfigurationCPUModel
         {
             get
             {
@@ -80,10 +82,10 @@ namespace UI.TestPage
             set
             {
                 configurationCPUModel = value;
-                cpuCheckControl = new ModelCheckControl();
+                cpuCheckControl = new ModelsCheckControl();
                 cpuCheckControl.Text = "CPU";
-                cpuCheckControl.TerminalModel = this.terminalCPUModel;
-                cpuCheckControl.ConfigurationModel = this.configurationCPUModel;
+                cpuCheckControl.TerminalModels = this.terminalCPUModel;
+                cpuCheckControl.ConfigurationModels = this.configurationCPUModel;
                 cpuCheckControl.Dock = DockStyle.Top;
                 cpuCheckControl.Size = new(this.Width, 100);
                 cpuCheckControl.Parent = this;
@@ -91,7 +93,7 @@ namespace UI.TestPage
                 Refresh();
             }
         }
-        public string TerminalGPUModel
+        public List<string> TerminalGPUModel
         {
             get
             {
@@ -103,7 +105,7 @@ namespace UI.TestPage
                
             }
         }
-        public string ConfigurationGPUModel
+        public List<string> ConfigurationGPUModel
         {
             get
             {
@@ -113,10 +115,10 @@ namespace UI.TestPage
             {
                 configurationGPUModel = value;
 
-                gpuCheckControl = new ModelCheckControl();
+                gpuCheckControl = new ModelsCheckControl();
                 gpuCheckControl.Text = "显卡";
-                gpuCheckControl.TerminalModel = this.terminalGPUModel;
-                gpuCheckControl.ConfigurationModel = this.configurationGPUModel;
+                gpuCheckControl.TerminalModels = this.terminalGPUModel;
+                gpuCheckControl.ConfigurationModels = this.configurationGPUModel;
                 gpuCheckControl.Dock = DockStyle.Top;
                 gpuCheckControl.Size = new(this.Width, 100);
                 gpuCheckControl.Parent = this;
@@ -145,7 +147,6 @@ namespace UI.TestPage
             set
             {
                 configurationDiskModels = value;
-
                 diskCheckControl = new ModelsCheckControl();
                 diskCheckControl.Text = "硬盘";
                 diskCheckControl.TerminalModels = terminalDiskModels;
@@ -198,11 +199,82 @@ namespace UI.TestPage
             InitializeComponent();
             
         }
-        protected override void OnPaint(PaintEventArgs e)
+        public void Work(int step,List<string> actualInfos, List<string> expectedInfos,bool flag)
         {
-            base.OnPaint(e);
-            
+            if (InvokeRequired)
+            {
+                this.Invoke(Work, step, actualInfos, expectedInfos, flag);
+            }
+            else
+            {
+                SetControlInit(actualInfos, expectedInfos, step);
+                if (!flag) Warning(step);
+                else Access(step);
+            }
         }
-        
+        private void SetControlInit(List<string> actualInfos, List<string> expectedInfos, int step)
+        {
+            switch (step)
+            {
+                case 1:
+                    TerminalCPUModel = actualInfos;
+                    ConfigurationCPUModel = expectedInfos;
+                    break;
+                case 2:
+                    TerminalMemoryModels = actualInfos;
+                    ConfigurationMemoryModels = expectedInfos;
+                    break;
+                case 3:
+                    TerminalGPUModel = actualInfos;
+                    ConfigurationGPUModel = expectedInfos;
+                    break;
+                case 4:
+                    TerminalDiskModels = actualInfos;
+                    ConfigurationDiskModels = expectedInfos;
+                    break;
+            }
+        }
+        private void Warning(int step)
+        {
+            string testName="硬件";
+            switch (step)
+            {
+                case 1:
+                    cpuCheckControl.Flag = false;
+                    testName = "CPU";
+                    break;
+                case 2:
+                    memoryCheckControl.Flag = false;
+                    testName = "内存";
+                    break;
+                case 3:
+                    gpuCheckControl.Flag = false;
+                    testName = "显卡";
+                    break;
+                case 4:
+                    diskCheckControl.Flag = false;
+                    testName = "硬盘";
+                    break;
+            }
+            MessageBox.Show("本机"+testName+"与配置文件不符！", "错误", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+        }
+        private void Access(int step)
+        {
+            switch (step)
+            {
+                case 1:
+                    cpuCheckControl.Flag = true;
+                    break;
+                case 2:
+                    memoryCheckControl.Flag = true;
+                    break;
+                case 3:
+                    gpuCheckControl.Flag = true;
+                    break;
+                case 4:
+                    diskCheckControl.Flag = true;
+                    break;
+            }
+        }
     }
 }

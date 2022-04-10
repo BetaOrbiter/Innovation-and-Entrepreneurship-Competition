@@ -1,55 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using LiveChartsCore;
-using LiveChartsCore.Geo;
+﻿using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
 using LiveChartsCore.SkiaSharpView.Painting;
-using LiveChartsCore.SkiaSharpView.SKCharts;
 using SkiaSharp;
+using MyTool.Monitor;
 
 namespace UI.TestPage
 {
     public partial class CPUBurner : UserControl
     {
-        private string CpuKind = "Intel(R) Core(TM) i7 - 9750H CPU @ 2.60GHz";
-        private double CpuUseRate, CpuSpeed;
-        private int CpuTemperature, fanSpeed;
-        private DateTime durationTime;
-        private LineSeries<int> lineSeries;
+        private string CpuModel = ComputerMonitor.CpuMonitorList[0].Name;
+        private float CpuUseRate, CpuClock;
+        private float CpuTemperature, fanSpeed;
+        private int totalDuration { get; set; }
+        private LineSeries<int> lineSeries { get; set; }
         private System.Threading.Timer timer;
-        int tmp=0;
-        public LineSeries<int> LineSerise
+        private int durationTime;
+        public string CPUModel
         {
             get
             {
-                return this.lineSeries;
+                return this.CpuModel;
             }
             set
             {
-                this.lineSeries = value;
-                PaintChart();
+                CpuModel = value;
+                Invalidate();
+                Refresh();
             }
         }
-        private string CPUKind
-        {
-            get
-            {
-                return this.CpuKind;
-            }
-            set
-            {
-                CpuKind = value;
-            }
-        }
-        private double CPUUseRate
+        public float CPUUseRate
         {
             get
             {
@@ -61,19 +40,19 @@ namespace UI.TestPage
                 this.Invalidate();
             }
         }
-        private double CPUSpeed
+        public float CPUClock
         {
             get
             {
-                return this.CpuSpeed;
+                return this.CpuClock;
             }
             set
             {
-                CpuSpeed = value;
+                CpuClock = value;
                 this.Invalidate();
             }
         }
-        public int CPUTemperature
+        public float CPUTemperature
         {
             get
             {
@@ -82,11 +61,11 @@ namespace UI.TestPage
             set
             {
                 CpuTemperature = value;
-                this.CPUThermometer.Value = CpuTemperature;
+                this.CPUThermometer.Value = (int)CpuTemperature;
                 this.Invalidate();
             }
         }
-        public int FanSpeed
+        public float FanSpeed
         {
             get
             {
@@ -96,11 +75,12 @@ namespace UI.TestPage
             {
                 fanSpeed = value;
                 if (fanSpeed > 0) this.fanPictureBox.Image = Properties.Resources.fanStart;
+                else this.fanPictureBox.Image = Properties.Resources.fanStop;
                 this.Invalidate();
             }
         }
 
-        public DateTime DurationTime
+        public int DurationTime
         {
             get
             {
@@ -108,98 +88,148 @@ namespace UI.TestPage
             }
             set
             {
-                durationTime = value;
-                
-                this.Invalidate();
+                durationTime =value;
+                this.progressBar.Value = durationTime * 100 / totalDuration;
+                this.progressLabel.Text = "测试进度" + durationTime * 100 / totalDuration + "%";
             }
         }
 
+        
+        private CpuMonitor CpuMonitor { get; init; }
 
         public CPUBurner()
         {
+            
             InitializeComponent();
-
-            CPUMessageChart.Size = new Size(this.Width - 160, this.Height / 3);
-            CPUMessageChart.Location = new Point(0, this.Height / 8);
+            this.durationTime = 0;
+            CpuMonitor = ComputerMonitor.CpuMonitorList[0];
+            CPUUseRateChart.Size = new Size(this.Width - 160, this.Height / 3);
+            CPUUseRateChart.Location = new Point(0, this.Height / 8);
             lineSeries = new LineSeries<int>
             {
-                Values = new int[] {1,2,3,4},
-                Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 4 },
-
+                Values = new int[1],
+                Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 2 },
+                LineSmoothness = 0,
+                GeometryFill = null, // mark
+                GeometryStroke = null // mark
             };
             
-            lineSeries.Values=lineSeries.Values.Append(5);
             
-            //lineSeries.Values.Append<int>(5);
-            
-            CPUMessageChart.Series = new ISeries[]
+            CPUUseRateChart.Series = new ISeries[]
             {
-                lineSeries
+                lineSeries,
             };
-            
+
+            CPUUseRateChart.XAxes = new List<Axis>{
+                new Axis{
+                  MaxLimit = 60,
+                  MinLimit = 0,
+                  
+                }
+            };
+            CPUUseRateChart.YAxes = new List<Axis>{
+                new Axis{
+                  MaxLimit = 100.5,
+                  MinLimit = 0
+                }
+            };
+
+
             CPUThermometer.Location = new Point(250, 550);
             CPUThermometer.Size = new Size(70, 180);
             CPUThermometer.Value = 50;
             CpuTemperature = 50;
           
-            CpuSpeed = 3.45;
-            CpuUseRate = 90.2;
-            durationTime = new DateTime();
-            
+           
+           
             //Point(560, 590);
             
             this.fanPictureBox.Size = new(100, 100);
             this.fanPictureBox.Location = new(310, 360);
             this.fanPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            fanSpeed = 5000;
-            timer = new System.Threading.Timer(
-                new TimerCallback(OnTimer)
-                , null
-                , 1000
-                , 1000
-             );
-            
-            if (fanSpeed > 0) this.fanPictureBox.Image = Properties.Resources.fanStart;
-            else this.fanPictureBox.Image = Properties.Resources.fanStop;
 
         }
-        public void OnTimer(object state)
-        {
-            tmp++;
-            lineSeries.Values=lineSeries.Values.Append(tmp);
-            PaintChart();
-            if (tmp >= 20)
-            {
-                timer.Change(-1, -1);
-                return;
-            }
-
-        }
-        //private void ChartWork()
-        //{
-            
-        //    for (int i = 1; i <= 5; i++)
-        //    {
-        //        lineSeries = new LineSeries<int> { Values=new int[]{ i,i+1,i+2} };
-        //        //Console.WriteLine(this.lineSeries.Values);
-        //        Thread.Sleep(1000);
-        //        CPUMessageChart.Update();
-        //        //PaintChart();
-        //    }
-        //}
-       
-
-        
-
-        private void PaintChart()
+        public void Work(string _CpuModel,int _totalDuration)
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new Action(this.PaintChart));
+                this.Invoke(Work, _CpuModel, _totalDuration);
             }
             else
             {
-                CPUMessageChart.Update();
+                timer = new System.Threading.Timer(
+                 new TimerCallback(OnTimer)
+                 , null
+                 , 1000
+                 , 1000
+               );
+                CPUModel = _CpuModel;
+                totalDuration = _totalDuration;
+
+            }
+        }
+        public void OnTimer(object state)
+        {
+            if (DurationTime >= totalDuration)
+            {
+                Stop();
+            }
+            else
+            {
+                ComputerMonitor.CpuMonitorList[0].Update();
+                ComputerMonitor.FanMonitorList[0].Update();
+                float maxColock = 0;
+                foreach(var cpuClocks in CpuMonitor.Clocks)
+                {
+                    maxColock = MathF.Max(maxColock, (float)cpuClocks!.Value!);
+                }
+
+                Update(
+                    (float)CpuMonitor.Usage!.Value!,
+                    maxColock / 1000f,
+                    (float)CpuMonitor.MaxTemperature!.Value!,
+                    MathF.Ceiling((float)ComputerMonitor.FanMonitorList[0]!.Speed!)
+                    );
+            }
+
+        }
+        private void Stop()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(Stop);
+            }
+            else
+            {
+                timer.Change(-1, -1);
+            }
+        }
+        
+
+        private void Update(float _CpuUseRate, float _CpuClock, float _temperature,float _fanSpeed)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action<float,float,float,float>(Update), _CpuUseRate, _CpuClock, _temperature, _fanSpeed);
+            }
+            else
+            {
+                DurationTime = durationTime + 1;
+                
+                FanSpeed = _fanSpeed;
+                CPUUseRate = _CpuUseRate;
+                CPUClock = _CpuClock;
+                CPUTemperature = _temperature;
+                lineSeries.Values = lineSeries.Values!.Append((int)_CpuUseRate).ToList();
+                if (durationTime > 60)
+                {
+                    var Xaxes  = CPUUseRateChart.XAxes.ToList();
+                    Xaxes[0].MaxLimit += 1;
+                    Xaxes[0].MinLimit += 1;
+                    CPUUseRateChart.XAxes = Xaxes;
+                }
+                
+                CPUUseRateChart.Update();
             }
         }
         protected override void OnPaint(PaintEventArgs e)
@@ -207,7 +237,7 @@ namespace UI.TestPage
             base.OnPaint(e);
             Graphics g = e.Graphics;
             
-            Rectangle rectangle = new(0, 0, this.Width, 100);
+            Rectangle rectangle = new(0, 0, this.Width, 120);
             rectangle.Inflate(-2, -2);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
@@ -216,63 +246,61 @@ namespace UI.TestPage
                 //绘制CPU型号
                 StringFormat stringFormat = new StringFormat();
                 stringFormat.Alignment = StringAlignment.Near;
-                stringFormat.LineAlignment = StringAlignment.Center;
-                Font font = new Font("Ink Free", 25, FontStyle.Regular);
-                g.DrawString("CPU", font, brush, rectangle, stringFormat);
-                font = new Font("方正舒体", 25, FontStyle.Regular);
-                stringFormat.Alignment = StringAlignment.Near;
-                g.DrawString("       型号:", font, brush, rectangle, stringFormat);
+                stringFormat.LineAlignment = StringAlignment.Far;
+                Font font = new Font("宋体", 25, FontStyle.Regular);
+                g.DrawString("CPU型号", font, brush, rectangle, stringFormat);
                 stringFormat.Alignment = StringAlignment.Far;
+                font.Dispose();
+                font = new Font("宋体", 15, FontStyle.Regular);
 
-                font = new Font("Ink Free", 15, FontStyle.Regular);
-
-                stringFormat.LineAlignment = StringAlignment.Center;
-                g.DrawString("  " + CPUKind, font, brush, rectangle, stringFormat);
+                stringFormat.LineAlignment = StringAlignment.Far;
+                g.DrawString("  " + CpuModel, font, brush, rectangle, stringFormat);
                 //绘制CPU利用率
                 rectangle.Size = new Size(this.Width/2, 150);
                 rectangle.Location = new(0, this.Height - 310);
                 stringFormat.Alignment = StringAlignment.Near;
                 stringFormat.LineAlignment = StringAlignment.Near;
-                font = new Font("Ink Free", 20, FontStyle.Regular);
-                g.DrawString("           CPU",font, brush, rectangle, stringFormat);
-                font = new Font("方正舒体", 20, FontStyle.Regular);
-                g.DrawString("                    利用率" , font, brush, rectangle, stringFormat);
-                font = new Font("Ink Free", 20, FontStyle.Regular);
-                g.DrawString("\n               " + CpuUseRate.ToString() + " %", font, brush, rectangle, stringFormat);
+                font.Dispose();
+                font = new Font("宋体", 18, FontStyle.Regular);
+                g.DrawString("           CPU利用率", font, brush, rectangle, stringFormat);
+                font.Dispose();
+                font = new Font("宋体", 18, FontStyle.Regular);
+                g.DrawString("\n            " + CpuUseRate.ToString("f2") + " %", font, brush, rectangle, stringFormat);
                 //绘制CPU速度
                 
                 rectangle.Location = new(this.Width / 2, this.Height - 310);
                 stringFormat.Alignment = StringAlignment.Near;
                 stringFormat.LineAlignment = StringAlignment.Near;
-                font = new Font("Ink Free", 20, FontStyle.Regular);
-                g.DrawString("           CPU", font, brush, rectangle, stringFormat);
-                font = new Font("方正舒体", 20, FontStyle.Regular);
-                g.DrawString("                    速度", font, brush, rectangle, stringFormat);
-                font = new Font("Ink Free", 20, FontStyle.Regular);
-                g.DrawString("\n           " + CpuSpeed.ToString() + " GHZ", font, brush, rectangle, stringFormat);
+                font.Dispose();
+                font = new Font("宋体", 18, FontStyle.Regular);
+                g.DrawString("           CPU速度", font, brush, rectangle, stringFormat);
+                font.Dispose();
+                font = new Font("宋体", 18, FontStyle.Regular);
+                g.DrawString("\n           " + CpuClock.ToString("f2") + " GHZ", font, brush, rectangle, stringFormat);
  
                 //绘制CPU温度
                 rectangle.Location = new Point(50, 590);
                 stringFormat.Alignment = StringAlignment.Near;
                 stringFormat.LineAlignment = StringAlignment.Near;
-                g.DrawString("CPU" , font, brush, rectangle, stringFormat);
-                font = new Font("方正舒体", 20, FontStyle.Regular);
-                g.DrawString("        温度 ", font, brush, rectangle, stringFormat);
-                font = new Font("Ink Free", 20, FontStyle.Regular);
-                g.DrawString("\n   " + CpuTemperature.ToString() + " ℃", font, brush, rectangle, stringFormat);
+                g.DrawString("CPU温度", font, brush, rectangle, stringFormat);
+                font.Dispose();
+                font = new Font("宋体", 18, FontStyle.Regular);
+                g.DrawString("\n " + CpuTemperature.ToString() + " ℃", font, brush, rectangle, stringFormat);
 
                 //绘制风扇转速
                 rectangle.Location = new Point(560, 590);
                 stringFormat.Alignment = StringAlignment.Near;
                 stringFormat.LineAlignment = StringAlignment.Near;
-                font = new Font("方正舒体", 20, FontStyle.Regular);
+                font.Dispose();
+                font = new Font("宋体", 18, FontStyle.Regular);
                 g.DrawString("风扇转速 ", font, brush, rectangle, stringFormat);
-                font = new Font("Ink Free", 20, FontStyle.Regular);
+                font.Dispose();
+                font = new Font("宋体", 18, FontStyle.Regular);
                 g.DrawString("\n" + fanSpeed.ToString() + " r/min", font, brush, rectangle, stringFormat);
 
             }
             //绘制分界线
-            using (Pen pen=new Pen(Color.Black))
+            using (Pen pen=new Pen(Color.Black, 2f))
             {
                 g.DrawLine(pen, new Point(0, 540), new Point(this.Width, 540));
                 g.DrawLine(pen, new Point(752 / 2, 540), new Point(752 / 2, this.Height));

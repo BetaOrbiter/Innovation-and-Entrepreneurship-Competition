@@ -14,33 +14,37 @@ namespace UI.TestPage
 {
     public partial class DiskBadSector : UserControl
     {
+        private List<Tuple<string,ulong>> disks;
         private int diskCount;
         private int nowDiskIndex;
-        private int status;
+        private int status = 0;
         private string nowTask;
         private BadDiskControl[] badDiskControls;
 
-        public int DiskCount
+        public List<Tuple<string, ulong>> Disks
         {
             get
             {
-                return diskCount;
+                return disks;
             }
             set
             {
-                diskCount = value;
+                disks = value;
+                this.status = 0;
+                diskCount = disks.Count;
+                disksPanel.AutoScroll = true;
                 disksPanel.Dock = DockStyle.Bottom;
                 disksPanel.Size = new(this.Width, this.Height * 3 / 7);
-                badDiskControls = new BadDiskControl [DiskCount];
-                for(int i=0;i<diskCount;i++)
+                badDiskControls = new BadDiskControl [diskCount];
+                for(int i=0;i< diskCount; i++)
                 {
                     badDiskControls[i] = new BadDiskControl();
-                    badDiskControls[i].DiskModel = "diskModel";
+                    badDiskControls[i].DiskModel = disks[i].Item1;
                     badDiskControls[i].Parent = this.disksPanel;
-                    badDiskControls[i].Size = new(298, this.Height);
+                    badDiskControls[i].Size = new(disksPanel.Width/2, this.Height);
                     badDiskControls[i].Dock = DockStyle.Right;
-                    badDiskControls[i].DiskCapactiy = 500;
-                    badDiskControls[i].DiskIndex = i;
+                    badDiskControls[i].DiskCapacity = disks[i].Item2;
+                    badDiskControls[i].DiskIndex = i+1;
                     badDiskControls[i].Hide();
                     badDiskControls[i].Status = 0;
                 }
@@ -56,9 +60,10 @@ namespace UI.TestPage
             set
             {
                 nowDiskIndex = value;
-                
-                this.progressLabel.Text = "测试进度" + (nowDiskIndex + 1)*100f / diskCount+"%";
-                if (nowDiskIndex != diskCount-1)
+                status = 1;
+                this.progressLabel.Text = "测试进度" + (nowDiskIndex)*100f / diskCount+"%";
+                this.progressBar.Value = (nowDiskIndex) * 100 / diskCount;
+                if (nowDiskIndex < diskCount-1)
                 {
                     badDiskControls[nowDiskIndex].Show();
                     badDiskControls[nowDiskIndex].Status = 1;
@@ -106,8 +111,54 @@ namespace UI.TestPage
         public DiskBadSector()
         {
             InitializeComponent();
+            this.progressBar.Value = 0;
+        }
+        public void Work(List<Tuple<string, ulong>> _disks)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(Work, _disks);
+            }
+            else
+            {
+                this.Disks = _disks;
+                NowDiskIndex = 0;
+            }
             
+        }
+        public void Change(bool noError)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(Change, noError);
+            }
+            else
+            {
+                if (noError)
+                {
+                    
+                    badDiskControls[nowDiskIndex].Status = 2;
+                    badDiskControls[nowDiskIndex].Dock = DockStyle.Left;
+                }
+                else
+                {
+                    MessageBox.Show("硬盘" + nowDiskIndex + "出现坏道！", "错误", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+                    badDiskControls[nowDiskIndex].Status = 3;
+                }
+                if (nowDiskIndex == diskCount - 1) 
+                {
+                    this.progressLabel.Text = "测试进度100%";
+                    this.progressBar.Value = 100;
+                    Status = 2; 
+                }
+                else
+                {
+                    Status = 1;
+                    NowDiskIndex = nowDiskIndex + 1;
+                }
             
+            }
+                
         }
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -134,7 +185,7 @@ namespace UI.TestPage
                 using (Font font = new Font("宋体", 20, FontStyle.Regular))
                 {
                     g.DrawString("已运行时间:",font, brush, rectangle, stringFormat);
-                    g.DrawString("\n\n当前检测硬盘:硬盘"+ NowDiskIndex, font, brush, rectangle, stringFormat);
+                    g.DrawString("\n\n当前检测硬盘:硬盘"+ (NowDiskIndex+1), font, brush, rectangle, stringFormat);
                     g.DrawString("\n\n\n\n当前执行任务:" + nowTask, font, brush, rectangle, stringFormat);
                 }
             }

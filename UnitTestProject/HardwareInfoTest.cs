@@ -7,10 +7,10 @@ namespace UnitTestProject
     [TestClass]
     public class HardwareInfoTest
     {
-        const string cpuName = "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz";
+        const string cpuName = "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz";
         const int cpuNumber = 1;
-        const uint corePerCpu = 4;
-        const uint logicPerCpu = 8;
+        const uint corePerCpu = 6;
+        const uint logicPerCpu = 12;
 
         const int memoryNumber = 2;
         readonly string[] memoryModel = { "KHX2666C15S4/8G     ", "HMA81GS6JJR8N-VK    " };
@@ -33,11 +33,21 @@ namespace UnitTestProject
             Assert.AreEqual(cpuNumber, info.CpuList.Count);
 
             var cpu = info.CpuList[0];
-            Assert.AreEqual(cpu.Name, cpuName);
+            Assert.AreEqual(cpuName, cpu.Name);
             Assert.AreEqual(corePerCpu, cpu.NumberOfCores);
             Assert.AreEqual(logicPerCpu, cpu.NumberOfLogicalProcessors);
         }
+        [TestMethod]
+        public void ReadCPU()
+        {
+            HardwareInformation info = new();
+            info.RefreshCPUList(false);
 
+            Assert.AreEqual(cpuNumber, info.CpuList.Count);
+
+            var cpu = info.CpuList[0];
+            Console.WriteLine(cpu);
+        }
         [TestMethod]
         public void TestMemeory()
         {
@@ -57,6 +67,26 @@ namespace UnitTestProject
                 i++;
             }
         }
+        [TestMethod]
+        public void ReadMem()
+        {
+            HardwareInformation info = new();
+            info.RefreshMemoryList();
+
+            var mems = info.MemoryList;
+            //Assert.AreEqual(memoryNumber, mems.Count);
+            int i = 0;
+            foreach (var mem in mems)
+            {
+                Console.WriteLine(mem.PartNumber);
+                //Assert.AreEqual(form, mem.FormFactor);
+                //Assert.AreEqual(memoryModel[i], mem.PartNumber);
+                //Assert.AreEqual(memSpeed[i], mem.Speed);
+                //Assert.AreEqual(memeCapacity[i], mem.Capacity);
+                //Assert.AreEqual(memoryManufacturer[i], mem.Manufacturer);
+                i++;
+            }
+        }
 
         [TestMethod]
         public void ReadDrive()
@@ -67,7 +97,22 @@ namespace UnitTestProject
 
             Console.WriteLine("Drive list");
             foreach (var disk in info.DriveList)
+            {
+                
                 Console.WriteLine(disk.Model);
+                Console.WriteLine(disk.Size);
+                foreach (var part in disk.PartitionList)
+                {
+                    bool flag = false;
+                    foreach (var volume in part.VolumeList)
+                    {
+                        Console.WriteLine(volume.Name);
+                        flag = true;
+                        break;
+                    }
+                    if (flag) break;
+                }
+            }
 
             Console.WriteLine("usb list");
             foreach (var disk in info.UsbDsikList)
@@ -104,10 +149,25 @@ namespace UnitTestProject
         }
 
         [TestMethod]
+        public void ReadGpu()
+        {
+            HardwareInformation info = new();
+            info.RefreshVideoControllerList();
+            //Assert.AreEqual(gpuNumber, info.VideoControllerList.Count);
+
+            int i = 0;
+            foreach (var gpu in info.VideoControllerList)
+            {
+                Console.WriteLine(gpu.Name);
+                i++;
+            }
+         }
+        [TestMethod]
         public void ReadMac()
         {
             HardwareInformation info = new();
             info.RefreshNetworkAdapterList();
+
             foreach (var net in info.NetworkAdapterList)
             {
                 Console.WriteLine(net.Name);

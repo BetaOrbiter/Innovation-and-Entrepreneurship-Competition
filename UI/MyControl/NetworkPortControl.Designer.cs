@@ -32,7 +32,7 @@
             this.routerToServer = new UI.MyControl.Trick();
             this.routerToComputer = new UI.MyControl.Trick();
             this.serverToRouter = new UI.MyControl.Trick();
-            this.ProgressBar = new UI.MyControl.MyWaitCircleBar();
+            this.progressBar = new UI.MyControl.MyWaitCircleBar();
             this.SuspendLayout();
             // 
             // compuertToRouter
@@ -87,34 +87,34 @@
             this.serverToRouter.TabIndex = 3;
             this.serverToRouter.Text = "trick1";
             // 
-            // ProgressBar
+            // progressBar
             // 
-            this.ProgressBar.AnimationSpeed = 5;
-            this.ProgressBar.CompositingQualityType = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-            this.ProgressBar.FilledColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(220)))), ((int)(((byte)(210)))));
-            this.ProgressBar.FilledColorAlpha = 130;
-            this.ProgressBar.FilledThickness = 4;
-            this.ProgressBar.InterpolationType = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-            this.ProgressBar.IsAnimated = true;
-            this.ProgressBar.Location = new System.Drawing.Point(177, 10);
-            this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Percentage = 50;
-            this.ProgressBar.PixelOffsetType = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-            this.ProgressBar.ShowText = false;
-            this.ProgressBar.Size = new System.Drawing.Size(20, 20);
-            this.ProgressBar.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            this.ProgressBar.TabIndex = 4;
-            this.ProgressBar.TextColor = System.Drawing.Color.Gray;
-            this.ProgressBar.TextRenderingType = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            this.ProgressBar.TextSize = 25;
-            this.ProgressBar.UnFilledColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(114)))), ((int)(((byte)(114)))));
-            this.ProgressBar.UnfilledThickness = 24;
+            this.progressBar.AnimationSpeed = 5;
+            this.progressBar.CompositingQualityType = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            this.progressBar.FilledColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(220)))), ((int)(((byte)(210)))));
+            this.progressBar.FilledColorAlpha = 130;
+            this.progressBar.FilledThickness = 4;
+            this.progressBar.InterpolationType = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.progressBar.IsAnimated = true;
+            this.progressBar.Location = new System.Drawing.Point(164, 3);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Percentage = 50;
+            this.progressBar.PixelOffsetType = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            this.progressBar.ShowText = false;
+            this.progressBar.Size = new System.Drawing.Size(20, 20);
+            this.progressBar.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            this.progressBar.TabIndex = 4;
+            this.progressBar.TextColor = System.Drawing.Color.Gray;
+            this.progressBar.TextRenderingType = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            this.progressBar.TextSize = 25;
+            this.progressBar.UnFilledColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(114)))), ((int)(((byte)(114)))));
+            this.progressBar.UnfilledThickness = 24;
             // 
             // NetworkPortControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ProgressBar);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.serverToRouter);
             this.Controls.Add(this.routerToComputer);
             this.Controls.Add(this.routerToServer);
@@ -131,6 +131,6 @@
         private Trick routerToServer;
         private Trick routerToComputer;
         private Trick serverToRouter;
-        private MyWaitCircleBar ProgressBar;
+        private MyWaitCircleBar progressBar;
     }
 }

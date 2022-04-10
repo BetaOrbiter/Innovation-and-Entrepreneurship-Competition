@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyTool.Monitor;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,23 +17,22 @@ namespace UI.TestPage
         private NetworkPortControl networkPortControl;
         private MACAddressControl macAddressControl;
         private float uploadSpeed;
-        private float downloadSpeed;
-        private string macAddress;
-
-        public string MACAddress
+        private float downloadSpeed; 
+        private List<Tuple<string,string,bool>> netItems;
+        private int count = 0;
+        public List<Tuple<string, string, bool>> NetItems
         {
             get
             {
-                return this.macAddress;
+                return this.netItems;
             }
             set
             {
-                this.macAddress = value;
-                this.macAddressControl = new MACAddressControl();
+                this.netItems = value;
                 macAddressControl.Parent = this;
-                macAddressControl.MACAddress = macAddress;
+                macAddressControl.NetItems = netItems;
                 macAddressControl.Dock = DockStyle.Top;
-                macAddressControl.Size = new(this.Width, this.Height / 3);
+                macAddressControl.Size = new(this.Width, this.Height * 2 / 5);
                 Refresh();
             }
         }
@@ -58,12 +58,11 @@ namespace UI.TestPage
             set
             {
                 this.downloadSpeed = value;
-                networkPortControl = new NetworkPortControl();
                 networkPortControl.Parent = this;
                 networkPortControl.DownloadSpeed = downloadSpeed;
                 networkPortControl.UploadSpeed = uploadSpeed;
                 networkPortControl.Dock = DockStyle.Top;
-                networkPortControl.Size = new(this.Width, this.Height / 2);
+                networkPortControl.Size = new(this.Width, this.Height * 3 / 5);
                 networkPortControl.Show();
                 Refresh();
             }
@@ -71,9 +70,39 @@ namespace UI.TestPage
         public NetworkTest()
         {
             InitializeComponent();
-            
-
-
+            networkPortControl = new NetworkPortControl();
+            macAddressControl = new MACAddressControl();
+        }
+        public void NetPortTestWork()
+        {
+            NetAdapterMonitor net = ComputerMonitor.NetAdapterMonitorList[3];
+            net.Update();
+            UpdateLoadSpeed((float) net.UploadSpeed!.Value!,(float) net.DownloadSpeed!.Value!);
+        }
+        public void UpdateLoadSpeed(float _uploadSpeed,float _downloadSpeed)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(UpdateLoadSpeed, _uploadSpeed, _downloadSpeed);
+            }
+            else
+            {
+                count++;
+                if (count == 5) networkPortControl.AC = true;
+                this.UploadSpeed = _uploadSpeed/(1024);
+                this.DownloadSpeed = _downloadSpeed/(1024);
+            }
+        }
+        public void MacCheckWork(List<Tuple<string, string, bool>> _netItems)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(MacCheckWork, _netItems);
+            }
+            else
+            {
+                NetItems = _netItems;
+            }
         }
         protected override void OnPaint(PaintEventArgs e)
         {

@@ -15,7 +15,20 @@ namespace UI.MyControl
         private List<string> terminalModels;
         private List<string> configurationModels;
         private string text;
-
+        private bool flag;
+        public bool Flag
+        {
+            get
+            {
+                return flag;
+            }
+            set
+            {
+                flag = value;
+                if (flag == false) this.progressBar.percentage = 0;
+                else this.progressBar.percentage = 100;
+            }
+        }
         public override string Text
         {
             get
@@ -56,7 +69,6 @@ namespace UI.MyControl
         public ModelsCheckControl()
         {
             InitializeComponent();
-            this.progressBar.Location = new(this.Width / 5 + 30, 10);
             terminalModels = new List<string>();
             configurationModels = new List<string>();
         }
@@ -74,10 +86,12 @@ namespace UI.MyControl
                 StringFormat stringFormat = new StringFormat();
                 stringFormat.Alignment = StringAlignment.Near;
                 stringFormat.LineAlignment = StringAlignment.Near;
-                Font font = new Font("Segoe Print", 18, FontStyle.Regular);
+                Font font = new Font("宋体", 20, FontStyle.Regular);
                 g.DrawString(text+"配置校验", font, brush, rectangle, stringFormat);
+                SizeF sizeF = g.MeasureString(text + "配置校验", font);
+                this.progressBar.Location = new((int)sizeF.Width, (int)sizeF.Height/5);
                 font.Dispose();
-                font = new Font("Segoe Print", 10, FontStyle.Regular);
+                font = new Font("宋体", 12, FontStyle.Regular);
                 stringFormat.Alignment = StringAlignment.Near;
                 stringFormat.LineAlignment = StringAlignment.Far;
                 g.DrawString("\n本机"+text+"数量 "+terminalModels.Count, font, brush, rectangle, stringFormat);
@@ -88,6 +102,7 @@ namespace UI.MyControl
                 {
                     count++;
                     rectangle = new RectangleF(0, h*count, this.Width, h);
+                    rectangle.Inflate(-2, -2);
                     stringFormat.Alignment = StringAlignment.Near;
                     stringFormat.LineAlignment = StringAlignment.Near;
                     g.DrawString("本机"+text+count +"型号 " +model, font, brush, rectangle, stringFormat);
@@ -97,11 +112,12 @@ namespace UI.MyControl
                 {
                     count++;
                     rectangle = new RectangleF(0, h * count, this.Width, h);
+                    rectangle.Inflate(-2, -2);
                     stringFormat.LineAlignment = StringAlignment.Center;
                     stringFormat.Alignment = StringAlignment.Near;
                     g.DrawString("\n配置文件" + text + count + "型号 " + model, font, brush, rectangle, stringFormat);
-
                 }
+                font.Dispose();
             }
         }
     }

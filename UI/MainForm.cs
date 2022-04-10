@@ -1,3 +1,4 @@
+using Controller;
 using UI.Forms;
 using UI.TestPage;
 
@@ -17,6 +18,7 @@ namespace UI
         private bool flag = false;
         private System.Threading.Timer timer;
         private int progress;
+
         public MainForm()
         {
             InitializeComponent();
@@ -30,38 +32,30 @@ namespace UI
             diskBadSectorPage = new DiskBadSector();
             networkTestPage = new NetworkTest();
             audioInterfaceTestPage = new AudioInterfaceTest();
+
+            //初始化悬浮球
             myFloatBox = new MyFloatBox();
             myFloatBox.Owner = this;
             myFloatBox.Show();
             myFloatBox.Bounds = new Rectangle(0, 0, 220, 100);
             myFloatBox.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 50, Screen.PrimaryScreen.Bounds.Height - 300);
-
-            diskBadSectorPage.DiskCount = 2;
-            diskBadSectorPage.NowDiskIndex = 0;
-            diskBadSectorPage.Status = 1;
-            audioInterfaceTestPage.Status = 0;
-            new AfMoveSupport(myFloatBox.processWave);
-            new AfMoveSupport(myFloatBox);
-
-            myFloatBox.processWave.MouseUp += this.floatBoxMenu_MouseUp;
+            myFloatBox.processWave.MouseUp += floatBoxMenu_MouseUp;
             myFloatBox.MouseUp += this.floatBoxMenu_MouseUp;
             myFloatBox.DoubleClick += this.notifyIcon_Click;
             myFloatBox.processWave.DoubleClick += this.notifyIcon_Click;
             myFloatBox.processWave.Click += this.StopButton_Click;
+            new AfMoveSupport(myFloatBox.processWave);
+            new AfMoveSupport(myFloatBox);
 
-            this.testPageCard.AddCard(CPUBurnerPage, "CPUBurner");
-            this.testPageCard.AddCard(configurationCheckPage, "ConfigurationCheck");
-            this.testPageCard.AddCard(diskBadSectorPage, "DiskBadSector");
-            this.testPageCard.AddCard(audioInterfaceTestPage, "AudioInterfaceTest");
-            this.testPageCard.AddCard(USBAndSeialTestPage, "USBTest");
-            this.testPageCard.AddCard(networkTestPage, "NetworkTest");
-            this.testPageCard.AddCard(diskBurnerPage, "DiskBurner");
-            //this.testPageCard.AddCard(CPUBurnerPage, "CPUBurner");
-            this.testPageCard.AddCard(memoryBurnePage, "MemoryBurner");
-            this.networkTestPage.UploadSpeed = 10;
-            this.networkTestPage.DownloadSpeed = 10;
-            this.networkTestPage.MACAddress = "90-78-41-C0-D1-E5";
-            this.diskBurnerPage.DiskCount = 2;
+
+            audioInterfaceTestPage.Status = 0;
+           
+
+            //this.testPageCard.AddCard(audioInterfaceTestPage, "AudioInterfaceTest");
+            //this.testPageCard.AddCard(USBAndSeialTestPage, "USBTest");
+            //this.testPageCard.AddCard(memoryBurnePage, "MemoryBurner");
+           
+            
             this.USBAndSeialTestPage.USBCount = 3;
             this.USBAndSeialTestPage.TestModel = true;
             this.USBAndSeialTestPage.SerialPortCount = 2;
@@ -71,31 +65,7 @@ namespace UI
             this.testStep.StepIndex = 0;
             this.configurationCheckPage.TerminalTime = DateTime.Now;
             this.configurationCheckPage.ConfigurationTime = DateTime.Now;
-            this.configurationCheckPage.TerminalCPUModel = "Intel(R) Core(TM) i7 - 9750H CPU @ 2.60GHz";
-            this.configurationCheckPage.ConfigurationCPUModel = "Intel(R) Core(TM) i7 - 9750H CPU @ 2.60GHz";
-            this.configurationCheckPage.TerminalMemoryModels = new List<string>()
-            {
-                "Kingston HyperX KHX2666C15S4/8G",
-                "Kingston HyperX KHX2666C15S4/8G",
-            };
-            this.configurationCheckPage.ConfigurationMemoryModels = new List<string>()
-            {
-                "Kingston HyperX KHX2666C15S4/8G",
-                "Kingston HyperX KHX2666C15S4/8G",
-            };
-
-            this.configurationCheckPage.TerminalGPUModel = "NVIDIA GeForce RTX 2060";
-            this.configurationCheckPage.ConfigurationGPUModel = "NVIDIA GeForce RTX 2060";
-            this.configurationCheckPage.TerminalDiskModels = new List<string>()
-            {
-                "Samsung SSD 870 EVO 500GB",
-                "Samsung SSD 870 EVO 500GB",
-            };
-            this.configurationCheckPage.ConfigurationDiskModels = new List<string>()
-            {
-                "Samsung SSD 870 EVO 500GB",
-                "Samsung SSD 870 EVO 500GB",
-            };
+            
             this.progressLabel.Text = "总测试进度:";
             //创建定时器
             timer = new System.Threading.Timer(
@@ -108,6 +78,7 @@ namespace UI
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
+        
         public void OnTimer(object state)
         {
             progress++;
@@ -146,17 +117,19 @@ namespace UI
 
         private void StopButton_Click(object sender, EventArgs e)
         {
-            flag = !flag;
             if (flag)
             {
-                this.StopButton.Text = "继续";
+
+                this.StopButton.Text = "开始";
                 this.StopButton.PressedColor = ColorTranslator.FromHtml("#67c23a");
             }
             else
             {
+                FreshTestOnTestCard();
                 this.StopButton.Text = "停止";
                 this.StopButton.PressedColor = Color.IndianRed;
             }
+            flag = !flag;
 
         }
         private void floatBoxMenu_MouseUp(object sender, MouseEventArgs e)
@@ -212,32 +185,134 @@ namespace UI
             }
             else
             {
-                this.testProgressBar.Value = progress;
-                this.myFloatBox.processWave.Value = progress;
-                if (progress % 13 == 0)
-                {
-                    this.testStep.StepIndex++;
-                    int index = this.testStep.StepIndex;
-                    if (index < testStep.Steps.Length)
-                    {
-                        this.NowTestItem.Text = "当前测试项目:" + this.testStep.Steps[index];
-                        this.myFloatBox.Text = this.testStep.Steps[index];
-                    }
-                    else
-                    {
-                        this.NowTestItem.Text = "测试结束";
-                        this.myFloatBox.Text = "测试结束";
-                    }
 
-                    //MessageBox.Show(index.ToString());
-                    this.testPageCard.ShowCard(index);
-                }
+            //    this.testProgressBar.Value = progress;
+            //    this.myFloatBox.processWave.Value = progress;
+            //    if (progress % 13 == 0)
+            //    {
+                    
+            //        this.testStep.StepIndex++;
+            //        int index = this.testStep.StepIndex;
+            //        if (index < testStep.Steps.Length)
+            //        {
+            //            this.NowTestItem.Text = "当前测试项目:" + this.testStep.Steps[index];
+            //            this.myFloatBox.Text = this.testStep.Steps[index];
+            //        }
+            //        else
+            //        {
+            //            this.NowTestItem.Text = "测试结束";
+            //            this.myFloatBox.Text = "测试结束";
+            //        }
+            //        //configurationCheckPage.Dispose();
+            //        MessageBox.Show(configurationCheckPage.Size.ToString());
+            //        testPageCard.CurrentCard();
+            //        testPageCard.ShowCard(0);
+            //        //MessageBox.Show(index.ToString());
+            //        //this.testPageCard.ShowCard(index);
+            //    }
                 
 
-                if (progress==100)
-                    this.Close();
+            //    if (progress==100)
+            //        this.Close();
             }
         }
-        
+
+        //一个测试page完成后调用，进行page变换
+        private void FreshTestOnTestCard()
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new Action(FreshTestOnTestCard));
+            }
+            else
+            {
+                if (testStep.StepIndex == 0) 
+                {
+                    CheckConfigurationWork();
+                }
+                else if(testStep.StepIndex == 1)
+                {
+                    DiskBadSectorWork();
+                }
+                else if (testStep.StepIndex == 2)
+                {
+                    CheckNetworkWork();
+                }
+                else if (testStep.StepIndex == 3)
+                {
+                    DiskBurnerWork();
+                }
+                else if (testStep.StepIndex == 4)
+                {
+                    CPUBurnerWork();
+                }
+                testStep.StepIndex++;
+            }
+        }
+
+        private void CheckConfigurationWork()
+        {
+            this.testPageCard.AddCard(configurationCheckPage, "ConfigurationCheck");
+            this.testPageCard.ShowCard(0);
+            ConfigChecker.UpdateResultUI += FreshTestOnTestCard;
+            ConfigChecker.UpdateProgressUI += configurationCheckPage.Work;
+            Thread thread = new Thread(ConfigChecker.Work);
+            thread.Start();
+        }
+        private void DiskBadSectorWork()
+        {
+            this.testPageCard.RemoveCard("ConfigurationCheck");
+            this.configurationCheckPage.Dispose();
+            this.testPageCard.AddCard(diskBadSectorPage, "DiskBadSector");
+            this.testPageCard.ShowCard(0);
+            DiskBadChecker.UpdateResultUI += FreshTestOnTestCard;
+            DiskBadChecker.InitUI += diskBadSectorPage.Work;
+            DiskBadChecker.UpdateProgressUI += diskBadSectorPage.Change;
+            Thread thread = new Thread(DiskBadChecker.Work);
+            thread.Start();
+        }
+
+        private void CheckNetworkWork()
+        {
+            this.testPageCard.RemoveCard("DiskBadSector");
+            this.configurationCheckPage.Dispose();
+            this.testPageCard.AddCard(networkTestPage, "NetworkTest");
+            this.testPageCard.ShowCard(0);
+            NetworkChecker.UpadteNetPortCheckUI += networkTestPage.NetPortTestWork;
+            NetworkChecker.UpdateMACCheckUI += networkTestPage.MacCheckWork;
+            NetworkChecker.UpdateResultUI += FreshTestOnTestCard;
+            Thread thread = new(NetworkChecker.Work);
+            thread.Start();
+        }
+        private void DiskBurnerWork()
+        {
+            this.testPageCard.RemoveCard("NetworkTest");
+            this.networkTestPage.Dispose();
+            this.testPageCard.AddCard(diskBurnerPage, "DiskBurner");
+            this.testPageCard.ShowCard(0);
+            this.diskBurnerPage.DiskCount = 2;
+        }
+        private void CPUBurnerWork()
+        {
+            this.testPageCard.RemoveCard("DiskBurner");
+            this.networkTestPage.Dispose();
+            this.testPageCard.AddCard(CPUBurnerPage, "CPUBurner");
+            this.testPageCard.ShowCard(0);
+            CPUBurnerWorker.InitUI += CPUBurnerPage.Work;
+            CPUBurnerWorker.UpdateResultUI += FreshTestOnTestCard;
+            Thread thread = new(CPUBurnerWorker.Work);
+            thread.Start();
+        }
+
+       
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

@@ -413,6 +413,12 @@ namespace UI.MyControl
                 bufferedGraphics.Graphics.DrawLine(new Pen(ColorTranslator.FromHtml("#67c23a"), 2.5f), base.Width / 2 - 10, base.Height / 2, base.Width / 2 - 5, base.Height / 2 + 10);
                 bufferedGraphics.Graphics.DrawLine(new Pen(ColorTranslator.FromHtml("#67c23a"), 2.5f), base.Width / 2 + 10, base.Height / 2 - 10, base.Width / 2 - 5, base.Height / 2 + 10);
             }
+            else if (percentage == 0)
+            {
+                UpdateUI.Enabled = false;
+                bufferedGraphics.Graphics.DrawLine(new Pen(ColorTranslator.FromHtml("#f56c6c"), 2f), base.Width / 2 - 10, base.Height / 2 - 10, base.Width / 2 + 10, base.Height / 2 + 10);
+                bufferedGraphics.Graphics.DrawLine(new Pen(ColorTranslator.FromHtml("#f56c6c"), 2f), base.Width / 2 - 10, base.Height / 2 + 10, base.Width / 2 + 10, base.Height / 2 - 10);
+            }
             else
             {
                 bufferedGraphics.Graphics.DrawArc(new Pen(Color.FromArgb(filledColorAlpha, filledColor.R, filledColor.G, filledColor.B), filledThickness), rect, StartPoint, (int)((double)Percentage * 3.6));
