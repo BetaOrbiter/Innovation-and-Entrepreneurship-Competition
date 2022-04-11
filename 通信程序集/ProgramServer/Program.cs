@@ -24,7 +24,7 @@ Thread memServer = new(new FileServer(listenIp, memPort, setting["memPath"]!).Li
 memServer.Start();
 Thread diskServer = new(new FileServer(listenIp, diskPort, setting["diskPath"]!).Listen);
 diskServer.Start();
-Thread profileServer = new(new ProfileServer(listenIp, profilePort, setting["profilePath"]!).Listen);
+Thread profileServer = new(new ProfileServer(listenIp, profilePort, setting["profilePath"]!, rtcPort, logPort).Listen);
 profileServer.Start();
 
 Thread rtcServer = new(new RtcServer(listenIp, rtcPort).Listen);

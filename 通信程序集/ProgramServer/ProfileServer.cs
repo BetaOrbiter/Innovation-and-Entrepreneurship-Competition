@@ -17,11 +17,14 @@ namespace Server
         /// </summary>
         private readonly Configuration profile;
 
-        internal ProfileServer(IPAddress listenIp, int port, string fileName) 
+        internal ProfileServer(IPAddress listenIp, int port, string fileName, int rtcPort, int logPort) 
             : base(listenIp, port)
         {
             Index = 0;
             profile = Configuration.GetInstance(fileName)!;
+            profile.RemoteIP = listenIp.ToString();
+            profile.RtcPort = rtcPort;
+            profile.LogPort = logPort;
         }
 
         internal override void Service(object? obj)

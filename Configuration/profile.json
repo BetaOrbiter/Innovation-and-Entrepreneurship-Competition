@@ -1,0 +1,45 @@
+{
+  "version": "0.1",
+  "id": 1,
+  "remoteIP": "192.168.31.141",
+  "logPort": 13006,
+  "rtcPort": 13005,
+
+  "logFileName": "log.txt",
+  "cpu_burnerPath": "c:/code/服务外包创新大赛/x64/cpu_burner.exe",
+  "memory_burnerPath": "c:/code/服务外包创新大赛/x64/memeory_burner.exe",
+  "diskspdPath": "c:/code/服务外包创新大赛/x64/diskspd.exe",
+  "rtcTolerance": 5,
+
+  "usbNumber": 3,
+  "CPUConfig": {
+    "num": 1,
+    "name": [
+      "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz"
+    ]
+  },
+  "memoryConfig": {
+    "num": 2,
+    "name": [
+      "KHX2666C15S4/8G     ",
+      "HMA81GS6JJR8N-VK    "
+    ],
+    "size": [
+      8589934592,
+      8589934592
+    ]
+  },
+  "driveConfig": {
+    "num": 1,
+    "name": [
+      "KBG40ZNS512G NVMe TOSHIBA 512GB"
+    ]
+  },
+  "gpuConfig": {
+    "num": 2,
+    "name": [
+      "Intel(R) UHD Graphics 630",
+      "NVIDIA GeForce GTX 1050"
+    ]
+  }
+}

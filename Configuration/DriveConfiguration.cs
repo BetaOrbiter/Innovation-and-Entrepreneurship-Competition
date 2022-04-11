@@ -2,7 +2,7 @@
 
 namespace Profile
 {
-    public class DriveConfiguration
+    public sealed class DriveConfiguration
     {
         [JsonProperty(PropertyName = "num")]
         public uint Number { get; set; }

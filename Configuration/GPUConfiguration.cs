@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 namespace Profile
 {
-    public class GPUConfiguration
+    public sealed class GPUConfiguration
     {
         [JsonProperty(PropertyName = "num")]
         public uint Number { get; set; }

@@ -2,10 +2,10 @@
 
 namespace Profile
 {
-    public class Configuration
+    public sealed class Configuration
     {
         private static Configuration? uniqueInstance;
-        private static readonly object locker = new object();
+        private static readonly object locker = new();
 
         public static Configuration? GetInstance(string filePath = "profile.json")
         {
@@ -20,10 +20,7 @@ namespace Profile
             return uniqueInstance;
         }
 
-        private Configuration()
-        {
-             
-        }
+        private Configuration() { }
 
         [JsonProperty(PropertyName = "version")]
         public string Version { get; set; }
@@ -35,10 +32,10 @@ namespace Profile
         public string RemoteIP { get; set; }
 
         [JsonProperty(PropertyName = "logPort")]
-        public uint LogPort { get; set; }
+        public int LogPort { get; set; }
 
         [JsonProperty(PropertyName = "rtcPort")]
-        public uint RtcPort { get; set; }
+        public int RtcPort { get; set; }
 
         [JsonProperty(PropertyName = "logFileName")]
         public string LogFileName { get; set; }

@@ -14,6 +14,7 @@ namespace Server
         internal LogServer(IPAddress listenIp, int port, string logPath) : base(listenIp, port)
         {
             LogFloder = logPath;
+            Directory.CreateDirectory(LogFloder);
         }
 
         internal override void Service(object? obj)
@@ -24,12 +25,12 @@ namespace Server
             byte[] indexByte = new byte[sizeof(int)];
             int byteRead = 0;
             do{
-                byteRead += socket.Receive(indexByte, byteRead, indexByte.Length - byteRead, SocketFlags.Peek);
+                byteRead += socket.Receive(indexByte, byteRead, indexByte.Length - byteRead, SocketFlags.Partial);
             } while (byteRead < indexByte.Length);
             int index = BitConverter.ToInt32(indexByte);
             
             //接收文件
-            using var output = File.Create(Path.Combine(LogFloder,$"log_{index}.log"));
+            using var output = File.Create(Path.Combine(LogFloder,$"log_{index}.txt"));
             var buffer = new byte[1500];
             while ((byteRead = socket.Receive(buffer)) > 0)
             {

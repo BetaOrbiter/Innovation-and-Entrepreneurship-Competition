@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Configuration\Profile.csproj" />
-    <ProjectReference Include="..\HardwareInfo\HardwareInfo.csproj" />
-    <ProjectReference Include="..\压力测试包\Stresser\Stresser.csproj" />
   </ItemGroup>
 
 </Project>

@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HardwareInfo\HardwareInfo.csproj" />
+    <ProjectReference Include="..\Logger\Logger.csproj" />
     <ProjectReference Include="..\Monitor\Monitor.csproj" />
   </ItemGroup>
 
