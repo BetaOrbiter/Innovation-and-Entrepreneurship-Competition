@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Controller
 {
-    public static class DiskBurnerWork
+    public static class DiskBurnerWorker
     {
         public static Action<List<string>, int> InitUI;
 
@@ -21,10 +21,14 @@ namespace Controller
             GetDiskVolumes();
             InitUI(entityDisks, 60);
             //开启硬盘压力测试
-            MyTool.DiskStresser diskStresser = new (@"C:\Users\刘星辰\Desktop\服创大赛\x64\diskspd.exe",testFilePath, 60);
-            diskStresser.Start();
-
-            diskStresser.WaitForExit();
+            //一半时间高读写量测试
+            MyTool.DiskStresser diskStresser = new(@"C:\Users\刘星辰\Desktop\服创大赛\x64\diskspd.exe", testFilePath, 30, 4 * 1024 * 1024);
+            //diskStresser.Start();
+            //diskStresser.WaitForExit();
+            //一半时间高IOPS测试
+            diskStresser = new(@"C:\Users\刘星辰\Desktop\服创大赛\x64\diskspd.exe", testFilePath, 30, 4 * 1024);
+            //diskStresser.Start();
+            //diskStresser.WaitForExit();
             Thread.Sleep(3000);
             UpdateResultUI();
         }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyTool
+﻿namespace MyTool
 {
     /// <summary>
     /// 内存压力测试类
@@ -22,10 +16,11 @@ namespace MyTool
         /// </summary>
         /// <param name="executablePath">可执行文件路径</param>
         /// <param name="physicalMemorySize">物理内存大小,单位B</param>
-        public MemoryStresser(string executablePath, ulong physicalMemorySize)
+        public MemoryStresser(string executablePath, ulong physicalMemorySize, int stressTime = 6 * 60 * 60)
             :base(executablePath)
         {
             PhysicalMemorySize = physicalMemorySize;
+            StressTime = stressTime;
         }
 
         protected override void SetArguments()

@@ -68,8 +68,8 @@ namespace UI.MyControl
                     timer = new System.Threading.Timer(
                        new TimerCallback(OnTimer)
                        , null
-                       , 250
-                       , 250
+                       , 300
+                       , 300
                      );
                 }
                

@@ -168,7 +168,7 @@ namespace UI.TestPage
 
             }
         }
-        public void OnTimer(object state)
+        private void OnTimer(object state)
         {
             if (DurationTime >= totalDuration)
             {

@@ -32,7 +32,7 @@ namespace UI.TestPage
                 macAddressControl.Parent = this;
                 macAddressControl.NetItems = netItems;
                 macAddressControl.Dock = DockStyle.Top;
-                macAddressControl.Size = new(this.Width, this.Height * 2 / 5);
+                macAddressControl.Size = new(this.Width, this.Height * netItems.Count / 5);
                 Refresh();
             }
         }
@@ -62,7 +62,7 @@ namespace UI.TestPage
                 networkPortControl.DownloadSpeed = downloadSpeed;
                 networkPortControl.UploadSpeed = uploadSpeed;
                 networkPortControl.Dock = DockStyle.Top;
-                networkPortControl.Size = new(this.Width, this.Height * 3 / 5);
+                networkPortControl.Size = new(this.Width, this.Height * 1 / 2);
                 networkPortControl.Show();
                 Refresh();
             }
@@ -70,6 +70,7 @@ namespace UI.TestPage
         public NetworkTest()
         {
             InitializeComponent();
+            this.AutoScroll = true;
             networkPortControl = new NetworkPortControl();
             macAddressControl = new MACAddressControl();
         }

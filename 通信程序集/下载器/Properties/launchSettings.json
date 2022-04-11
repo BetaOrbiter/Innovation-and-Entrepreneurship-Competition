@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "下载器": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

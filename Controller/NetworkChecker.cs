@@ -25,7 +25,7 @@ namespace Controller
             Ping ping = new();
             for(int i = 1; i <= 5; i++)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(1200);
                 var reply = ping.Send(IPAddress.Loopback);
                 UpadteNetPortCheckUI();
                 
@@ -54,7 +54,7 @@ namespace Controller
         
         private static bool MacCheck(string macAddress)
         {
-            Regex r = new Regex(@"^([0-9A-F][0-9A-F]-[0-9A-F][0-9A-F]-[0-9A-F][0-9A-F]-[0-9A-F][0-9A-F]-[0-9A-F][0-9A-F]-[0-9A-F][0-9A-F])$");
+            Regex r = new(@"^([0-9A-F][0-9A-F]-[0-9A-F][0-9A-F]-[0-9A-F][0-9A-F]-[0-9A-F][0-9A-F]-[0-9A-F][0-9A-F]-[0-9A-F][0-9A-F])$");
             return r.IsMatch(macAddress);
         }
     }

@@ -14,8 +14,8 @@ namespace UI
     {
         private int diskActRate;
         private string diskModel = "Samsung SSD 870 EVO 500GB";
-        private int readSpeed;
-        private int writeSpeed;
+        private float readSpeed;
+        private float writeSpeed;
         private int diskNumber;
         private string text;
         public override string Text {
@@ -57,7 +57,7 @@ namespace UI
             }
         }
 
-        public int ReadSpeed
+        public float ReadSpeed
         {
             get
             {
@@ -70,7 +70,7 @@ namespace UI
             }
         }
 
-        public int WriteSpeed
+        public float WriteSpeed
         {
             get
             {
@@ -132,7 +132,7 @@ namespace UI
                 rectangle.Size = new(this.Width * 1 / 3, this.Height * 4 / 5);
                 stringFormat.LineAlignment = StringAlignment.Near;
                 stringFormat.Alignment = StringAlignment.Center;
-                g.DrawString("读取速度 "+readSpeed+"KB/s", font, brush, rectangle, stringFormat);
+                g.DrawString("读取速度 " + readSpeed + "KB/s", font, brush, rectangle, stringFormat);
                 stringFormat.LineAlignment = StringAlignment.Center;
                 g.DrawString("写入速度 " + writeSpeed + "KB/s", font, brush, rectangle, stringFormat);
                 font.Dispose();

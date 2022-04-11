@@ -28,6 +28,5 @@ namespace Controller
             Thread.Sleep(3000);
             UpdateResultUI();
         }
-       
     }
 }

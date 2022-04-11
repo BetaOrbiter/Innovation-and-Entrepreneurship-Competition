@@ -290,7 +290,10 @@ namespace UI
             this.networkTestPage.Dispose();
             this.testPageCard.AddCard(diskBurnerPage, "DiskBurner");
             this.testPageCard.ShowCard(0);
-            this.diskBurnerPage.DiskCount = 2;
+            DiskBurnerWorker.InitUI += diskBurnerPage.Work;
+            DiskBurnerWorker.UpdateResultUI += FreshTestOnTestCard;
+            Thread thread = new(DiskBurnerWorker.Work);
+            thread.Start();
         }
         private void CPUBurnerWork()
         {
@@ -305,14 +308,6 @@ namespace UI
         }
 
        
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void MainForm_Shown(object sender, EventArgs e)
-        {
-            
-        }
+        
     }
 }

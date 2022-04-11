@@ -7,7 +7,7 @@ namespace MyTool
     /// 调用位于<see cref="ExcutablePath"/>处的外部可执行程序进行压力测试<br/>
     /// 调用者可指定测试时间和测试线程数
     /// </summary>
-    public abstract class StresserBase
+    public abstract class StresserBase:IDisposable
     {
         protected Process Program { get; set; } = new();
         
@@ -60,18 +60,12 @@ namespace MyTool
         /// <exception cref="System.ComponentModel.Win32Exception"/>
         /// <exception cref="System.NotSupportedException"/>
         /// <exception cref="System.InvalidOperationException"/>
-        public void Kill()
-        {
-            Program.Kill();
-        }
+        public void Kill() => Program.Kill();
 
         /// <summary>
         /// 指示<see cref="System.Diagnostics.Process"/>组件无期限地等待相关进程退出
         /// </summary>
-        public void WaitForExit()
-        {
-            Program.WaitForExit();
-        }
+        public void WaitForExit() => Program.WaitForExit();
 
         /// <summary>
         /// 指示<see cref="System.Diagnostics.Process"/>组件等待关联进程退出，至多<paramref name="seconds"/>秒
@@ -84,10 +78,7 @@ namespace MyTool
         /// <see langword="true"/> if the associated process has exited;
         /// otherwise, <see langword="false"/>
         /// </returns>
-        public bool WaitForExit(int seconds)
-        {
-            return Program.WaitForExit(seconds * 1000);
-        }
+        public bool WaitForExit(int seconds) => Program.WaitForExit(seconds * 1000);
 
         /// <summary>
         /// Instructs the process component to wait for the associated process to exit, or for the <paramref name="cancellationToken"/> to be cancelled.
@@ -98,9 +89,8 @@ namespace MyTool
         /// <returns>
         /// A task that will complete when the process has exited, cancellation has been requested, or an error occurs.
         /// </returns>
-        public Task WaitForExitAsync(CancellationToken cancellationToken = default)
-        {
-            return Program.WaitForExitAsync(cancellationToken);
-        }
+        public Task WaitForExitAsync(CancellationToken cancellationToken = default) => Program.WaitForExitAsync(cancellationToken);
+
+        public void Dispose() => ((IDisposable)Program).Dispose();
     }
 }

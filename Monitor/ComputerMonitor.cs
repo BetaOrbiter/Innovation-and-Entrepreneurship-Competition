@@ -7,7 +7,6 @@ namespace MyTool.Monitor
     /// <summary>
     /// 从传感器监视计算机运行状态的类<br/>
     /// 可获取处理器、内存、硬盘等硬件的运行情况(其实也可以读配置,bushi)<br/>
-    /// 使用者必须持有<see cref="ComputerMonitor"/>对象，否则各成员传感器将随本对象一并析构!!<br/>
     /// 是<see cref="LibreHardwareMonitor.Hardware">的wrapper
     /// </summary>
     public static class ComputerMonitor

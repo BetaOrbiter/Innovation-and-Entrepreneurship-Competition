@@ -299,8 +299,6 @@
             this.Text = "AutoMaticx86";
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.BaseForm.ResumeLayout(false);
             this.MainLayout.ResumeLayout(false);
             this.TitlePanel.ResumeLayout(false);

@@ -23,7 +23,7 @@
         /// <summary>
         /// 块大小(单位B), 默认4M
         /// </summary>
-        public ulong BloclSize { get; set; } = 4 * 1024 * 1024;
+        public ulong BlockSize { get; set; } = 4 * 1024 * 1024;
         /// <summary>
         /// 目标文件路径的集合
         /// </summary>
@@ -35,20 +35,21 @@
         /// </summary>
         /// <param name="executablePath">可执行文件路径</param>
         /// <param name="testFilePathes">目标文件路径</param>
-        public DiskStresser(string executablePath, List<string> testFilePathes, int stressTime = 60 * 60 * 3)
+        public DiskStresser(string executablePath, List<string> testFilePathes, int stressTime = 60 * 60 * 3, ulong blockSize= 4 * 1024 * 1024)
             :base(executablePath)
         {
             TestFilePathes = testFilePathes;
             StressTime = stressTime;
+            BlockSize = blockSize;
         }
 
         protected override void SetArguments()
         {
-            string com = $"-D -c{FileSize/1024}K -b{BloclSize/1024}K -t{ThreadNumber} -w{WriteRate} -o32 -d{StressTime} -Su";
+            string com = $"-D -c{FileSize/1024}K -b{BlockSize/1024}K -t{ThreadNumber} -w{WriteRate} -o32 -d{StressTime} -Su";
 
             Program.StartInfo.ArgumentList.Add("-D");
             Program.StartInfo.ArgumentList.Add($"-c{FileSize / 1024}K");
-            Program.StartInfo.ArgumentList.Add($"-b{BloclSize / 1024}K");
+            Program.StartInfo.ArgumentList.Add($"-b{BlockSize / 1024}K");
             Program.StartInfo.ArgumentList.Add($"-t{ThreadNumber}");
             Program.StartInfo.ArgumentList.Add($"-w{WriteRate}");
             Program.StartInfo.ArgumentList.Add("-r");
