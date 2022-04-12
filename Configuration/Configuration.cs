@@ -22,6 +22,12 @@ namespace Profile
 
         private Configuration() { }
 
+        /// <summary>
+        /// 向<paramref name="stream"/>写入格式化配置字符串
+        /// </summary>
+        /// <param name="stream">输出流</param>
+        public void Print(StreamWriter stream) => stream.Write(JsonConvert.SerializeObject(this, Formatting.Indented));
+
         [JsonProperty(PropertyName = "version")]
         public string Version { get; set; }
         

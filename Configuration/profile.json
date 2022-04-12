@@ -6,7 +6,7 @@
   "rtcPort": 13005,
 
   "logFileName": "log.txt",
-  "cpu_burnerPath": "c:/code/服务外包创新大赛/x64/cpu_burner.exe",
+  "cpu_burnerPath": "",
   "memory_burnerPath": "c:/code/服务外包创新大赛/x64/memeory_burner.exe",
   "diskspdPath": "c:/code/服务外包创新大赛/x64/diskspd.exe",
   "rtcTolerance": 5,

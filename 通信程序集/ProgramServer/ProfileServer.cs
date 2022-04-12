@@ -17,11 +17,11 @@ namespace Server
         /// </summary>
         private readonly Configuration profile;
 
-        internal ProfileServer(IPAddress listenIp, int port, string fileName, int rtcPort, int logPort) 
+        internal ProfileServer(IPAddress listenIp, int port, string profileName, int rtcPort, int logPort) 
             : base(listenIp, port)
         {
             Index = 0;
-            profile = Configuration.GetInstance(fileName)!;
+            profile = Configuration.GetInstance(profileName)!;
             profile.RemoteIP = listenIp.ToString();
             profile.RtcPort = rtcPort;
             profile.LogPort = logPort;
@@ -36,7 +36,7 @@ namespace Server
             {
                 myIndex = Index++;
                 profile.Id = myIndex;
-                buffer = JsonConvert.SerializeObject(profile);
+                buffer = JsonConvert.SerializeObject(profile, Formatting.Indented);
             }
             using Socket socket = (Socket)obj!;
             socket.Send(System.Text.Encoding.UTF8.GetBytes(buffer));
