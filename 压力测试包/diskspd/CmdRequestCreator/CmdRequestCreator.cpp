@@ -194,6 +194,5 @@ int __cdecl main(int argc, const char* argv[])
         CloseHandle(g_hEventFinished);
     }
 
-    system("pause");
     return 0;
 }

@@ -25,7 +25,12 @@ namespace MyTool
         /// 测试线程数量,默认<see cref="System.Environment.ProcessorCount"/>个
         /// </summary>
         public uint ThreadNumber { get; set; } = (uint)System.Environment.ProcessorCount;
-        
+
+        /// <summary>
+        /// 相关进程的退出时的返回值
+        /// </summary>
+        public int ExitCode => Program.ExitCode;
+
         public StresserBase(string executablePath)
         {
             ExcutablePath = executablePath;

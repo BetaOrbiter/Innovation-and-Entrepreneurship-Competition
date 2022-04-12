@@ -1992,13 +1992,6 @@ bool IORequestGenerator::GenerateRequests(Profile& profile, IResultParser& resul
             PrintVerbose(profile.GetVerbose(), "Generating requests for timespan %u.\n", i + 1);
             fOk = _GenerateRequestsForTimeSpan(profile, vTimeSpans[i], vResults[i], pSynch);
         }
-
-        // TODO: show results only for timespans that succeeded
-        SystemInformation system;
-        EtwResultParser::ParseResults(vResults);
-        string sResults = resultParser.ParseResults(profile, system, vResults);
-        printf("%s", sResults.c_str());
-        fflush(stdout);
     }
 
     return fOk;
