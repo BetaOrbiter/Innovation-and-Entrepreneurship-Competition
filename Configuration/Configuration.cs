@@ -43,6 +43,26 @@ namespace Profile
         [JsonProperty(PropertyName = "rtcPort")]
         public int RtcPort { get; set; }
 
+        [JsonProperty(PropertyName = "cpuStressTime")]
+        public int CpuStressTime { get; set; }
+
+        [JsonProperty(PropertyName = "memoryStressTime")]
+        public int MemoryStressTime { get; set; }
+
+        [JsonProperty(PropertyName = "diskStressTime")]
+        public int DiskStressTime { get; set; }
+
+
+        [JsonProperty(PropertyName = "quickCpuStressTime")]
+        public int QuickCpuStressTime { get; set; }
+
+        [JsonProperty(PropertyName = "quickMemoryStressTime")]
+        public int QuickMemoryStressTime { get; set; }
+
+        [JsonProperty(PropertyName = "quickDiskStressTime")]
+        public int QuickDiskStressTime { get; set; }
+
+
         [JsonProperty(PropertyName = "logFileName")]
         public string LogFileName { get; set; }
 
@@ -60,6 +80,9 @@ namespace Profile
 
         [JsonProperty(PropertyName ="usbNumber")]
         public int UsbNumber { get; set; }
+
+        [JsonProperty(PropertyName = "serialNumber")]
+        public int SerialPortNumber { get; set; }
 
         [JsonProperty(PropertyName = "CPUConfig")]
         public CPUConfiguration CPUConfig { get; set; }

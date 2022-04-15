@@ -12,5 +12,7 @@ namespace Profile
 
         [JsonProperty(PropertyName = "size")]
         public IList<ulong> Size;
+
+        private MemoryConfiguration() { }
     }
 }

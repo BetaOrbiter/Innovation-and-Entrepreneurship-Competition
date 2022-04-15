@@ -20,7 +20,9 @@ namespace UI.TestPage
         private int status = 0;
         private string nowTask;
         private BadDiskControl[] badDiskControls;
-
+        private TimeSpan durationTime;
+        private DateTime timeStart;
+        private System.Threading.Timer timer;
         public List<Tuple<string, ulong>> Disks
         {
             get
@@ -30,19 +32,19 @@ namespace UI.TestPage
             set
             {
                 disks = value;
-                this.status = 0;
+                Status = 1;
                 diskCount = disks.Count;
                 disksPanel.AutoScroll = true;
                 disksPanel.Dock = DockStyle.Bottom;
-                disksPanel.Size = new(this.Width, this.Height * 3 / 7);
+                disksPanel.Size = new(this.Width, this.Height * 3 / 7 + 35);
                 badDiskControls = new BadDiskControl [diskCount];
                 for(int i=0;i< diskCount; i++)
                 {
                     badDiskControls[i] = new BadDiskControl();
                     badDiskControls[i].DiskModel = disks[i].Item1;
                     badDiskControls[i].Parent = this.disksPanel;
-                    badDiskControls[i].Size = new(disksPanel.Width/2, this.Height);
-                    badDiskControls[i].Dock = DockStyle.Right;
+                    badDiskControls[i].Size = new(disksPanel.Width / 2, this.disksPanel.Height - 22);
+                    
                     badDiskControls[i].DiskCapacity = disks[i].Item2;
                     badDiskControls[i].DiskIndex = i+1;
                     badDiskControls[i].Hide();
@@ -60,23 +62,8 @@ namespace UI.TestPage
             set
             {
                 nowDiskIndex = value;
-                status = 1;
-                this.progressLabel.Text = "测试进度" + (nowDiskIndex)*100f / diskCount+"%";
-                this.progressBar.Value = (nowDiskIndex) * 100 / diskCount;
-                if (nowDiskIndex < diskCount-1)
-                {
-                    badDiskControls[nowDiskIndex].Show();
-                    badDiskControls[nowDiskIndex].Status = 1;
-                    badDiskControls[nowDiskIndex+1].Show();
-                    badDiskControls[nowDiskIndex+1].Status = 0;
-                }
-                else
-                {
-                    badDiskControls[nowDiskIndex].Show();
-                    badDiskControls[nowDiskIndex].Status = 1;
-                }
+                SetPosition();
                 Invalidate();
-                Refresh();
             }
         }
         public int Status
@@ -98,6 +85,7 @@ namespace UI.TestPage
                         break;
                     case 2:
                         nowTask = "检测完毕";
+                        timer.Change(-1, -1);
                         break;
                     case 3:
                         nowTask = "坏道修复中";
@@ -105,13 +93,32 @@ namespace UI.TestPage
                    
                 }
                 Invalidate();
-                Refresh();
+            }
+        }
+
+        public TimeSpan DurationTime
+        {
+            get
+            {
+                return durationTime;
+            }
+            set
+            {
+                durationTime = value;
+                this.progressLabel.Text = $"测试进度 {(NowDiskIndex * 100f / diskCount).ToString("f1")} %"+
+                     $"(已运行时间 {durationTime.Hours}:{durationTime.Minutes}:{durationTime.Seconds}) ";
+                this.progressBar.Value = (NowDiskIndex) * 100 / diskCount;
             }
         }
         public DiskBadSector()
         {
             InitializeComponent();
             this.progressBar.Value = 0;
+            Status = 0;
+            nowDiskIndex = -1;
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
         public void Work(List<Tuple<string, ulong>> _disks)
         {
@@ -123,6 +130,14 @@ namespace UI.TestPage
             {
                 this.Disks = _disks;
                 NowDiskIndex = 0;
+                timeStart = DateTime.Now;
+                DurationTime = DateTime.Now - DateTime.Now;
+                timer = new System.Threading.Timer(
+                new TimerCallback(OnTimer)
+                , null
+                , 1000
+                , 1000
+              );
             }
             
         }
@@ -136,29 +151,45 @@ namespace UI.TestPage
             {
                 if (noError)
                 {
-                    
                     badDiskControls[nowDiskIndex].Status = 2;
-                    badDiskControls[nowDiskIndex].Dock = DockStyle.Left;
                 }
                 else
                 {
-                    MessageBox.Show("硬盘" + nowDiskIndex + "出现坏道！", "错误", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+                    MessageBox.Show($"硬盘{nowDiskIndex+1}出现坏道！", "错误", 
+                    MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
                     badDiskControls[nowDiskIndex].Status = 3;
                 }
-                if (nowDiskIndex == diskCount - 1) 
+                if (nowDiskIndex >= diskCount - 1) 
                 {
-                    this.progressLabel.Text = "测试进度100%";
+                    this.progressLabel.Text = $"测试进度 100 %" +
+                     $"(已运行时间 {durationTime.Hours}:{durationTime.Minutes}:{durationTime.Seconds}) ";
                     this.progressBar.Value = 100;
+                    timer.Change(-1, -1);
                     Status = 2; 
                 }
                 else
                 {
                     Status = 1;
-                    NowDiskIndex = nowDiskIndex + 1;
                 }
-            
+                NowDiskIndex = nowDiskIndex + 1;
             }
                 
+        }
+        
+        private void OnTimer(object state)
+        {
+            UpdateTime();
+        }
+        private void UpdateTime()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(UpdateTime);
+            }
+            else
+            {
+                DurationTime = DateTime.Now - timeStart;
+            }
         }
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -184,16 +215,28 @@ namespace UI.TestPage
                 stringFormat.LineAlignment = StringAlignment.Center;
                 using (Font font = new Font("宋体", 20, FontStyle.Regular))
                 {
-                    g.DrawString("已运行时间:",font, brush, rectangle, stringFormat);
-                    g.DrawString("\n\n当前检测硬盘:硬盘"+ (NowDiskIndex+1), font, brush, rectangle, stringFormat);
-                    g.DrawString("\n\n\n\n当前执行任务:" + nowTask, font, brush, rectangle, stringFormat);
+                    g.DrawString($"\n当前检测硬盘:硬盘{Math.Min(diskCount, NowDiskIndex + 1)}", font, brush, rectangle, stringFormat);
+                    g.DrawString("\n\n\n当前执行任务:" + nowTask, font, brush, rectangle, stringFormat);
                 }
             }
         }
-
+        private void SetPosition()
+        {
+            for (int i = 0; i < diskCount; i++)
+            {
+                badDiskControls[i].Location = new(
+                    (diskCount + badDiskControls[i].DiskIndex-1 - NowDiskIndex) % diskCount
+                    * this.Width / 2,
+                    0
+                    );
+                if (badDiskControls[i].DiskIndex-1 == NowDiskIndex)
+                    badDiskControls[i].Status = 1;
+                badDiskControls[i].Show();
+            }
+        }
         private void progressBar_Click(object sender, EventArgs e)
         {
-
+           
         }
     }
 }

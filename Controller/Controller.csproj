@@ -8,8 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NAudio" Version="2.0.1" />
+    <PackageReference Include="NAudio.WaveFormRenderer" Version="2.0.0" />
+    <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.TRIAL" Version="15.1.12" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Configuration\Profile.csproj" />
     <ProjectReference Include="..\HardwareInfo\HardwareInfo.csproj" />
+    <ProjectReference Include="..\Logger\Logger.csproj" />
     <ProjectReference Include="..\压力测试包\Stresser\Stresser.csproj" />
   </ItemGroup>
 

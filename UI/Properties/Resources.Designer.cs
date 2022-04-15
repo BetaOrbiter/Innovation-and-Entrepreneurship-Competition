@@ -193,9 +193,9 @@ namespace UI.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap NetworkComputer {
+        internal static System.Drawing.Bitmap NetWorkComputer {
             get {
-                object obj = ResourceManager.GetObject("NetworkComputer", resourceCulture);
+                object obj = ResourceManager.GetObject("NetWorkComputer", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -223,9 +223,49 @@ namespace UI.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap pre {
+            get {
+                object obj = ResourceManager.GetObject("pre", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap SerialPort {
+            get {
+                object obj = ResourceManager.GetObject("SerialPort", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap setting {
+            get {
+                object obj = ResourceManager.GetObject("setting", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Speakers {
             get {
                 object obj = ResourceManager.GetObject("Speakers", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap USB {
+            get {
+                object obj = ResourceManager.GetObject("USB", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

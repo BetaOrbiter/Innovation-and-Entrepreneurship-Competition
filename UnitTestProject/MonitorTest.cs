@@ -74,9 +74,9 @@ namespace UnitTestProject
             Assert.IsNotNull(mem);
             Assert.IsNotNull(mem.Name);
             Assert.IsNotNull(mem.Usage);
+            mem.Update();
             Console.WriteLine(mem.Name);
             Console.WriteLine(mem.Usage.Value);
-            
         }
 
         [TestMethod]

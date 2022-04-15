@@ -37,6 +37,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(246)))));
             this.Name = "ConfigurationCheck";
+            this.Padding = new System.Windows.Forms.Padding(15, 0, 15, 0);
             this.Size = new System.Drawing.Size(642, 515);
             this.ResumeLayout(false);
 

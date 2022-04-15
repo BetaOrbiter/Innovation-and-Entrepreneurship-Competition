@@ -147,7 +147,10 @@ namespace UI
                 }
             }
         }
-
+        public void Stop()
+        {
+            timer.Stop();
+        }
         private void DrawTickHandle(Graphics g,
             Pen pen,
             int cx, int cy,

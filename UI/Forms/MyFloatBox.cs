@@ -56,7 +56,8 @@ namespace UI.Forms
             processWave.Parent = this;
             processWave.Font = new Font("微软雅黑", 10, FontStyle.Regular);
             processWave.ForeColor = Color.Black;
-            processWave.BackColor = Color.DarkSeaGreen;
+            //processWave.BackColor = Color.DarkSeaGreen;
+            processWave.BackColor = Color.FromArgb(243, 244, 246);
             processWave.ValueColor = Color.LightSkyBlue;
             processWave.RectColor = Color.DarkSeaGreen;
             processWave.RectWidth = 4;

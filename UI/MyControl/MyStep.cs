@@ -174,6 +174,9 @@ namespace UI
         [Category("自定义")]
         public event EventHandler IndexChecked;
         private MyRoundBar [] hopeRoundProgressBars;
+
+        
+
         private int[] nowProgress;
         public MyStep()
         {
@@ -194,11 +197,10 @@ namespace UI
             {
                 hopeRoundProgressBars[i] = new MyRoundBar();
                 hopeRoundProgressBars[i].Size = new Size(m_stepWidth - 4, m_stepWidth - 4);
-                hopeRoundProgressBars[i].Font = new Font("Segoe Print", 7, FontStyle.Regular);
+                hopeRoundProgressBars[i].Font = new Font("宋体", 7, FontStyle.Regular);
                 hopeRoundProgressBars[i].Parent = this;
                 hopeRoundProgressBars[i].ValueNumber = 25;
                 hopeRoundProgressBars[i].BackColor = Color.FromArgb(243, 244, 246);
-                
                 hopeRoundProgressBars[i].ValueNumber = 0;
                 hopeRoundProgressBars[i].Hide();
             }
@@ -209,18 +211,18 @@ namespace UI
         {
             //List<MyRoundBar> k=new List<MyRoundBar>();
             
-            int num = m_lstCacheRect.FindIndex((Rectangle p) => p.Contains(e.Location));
-            int num2 = m_listStringRect.FindIndex((RectangleF p) => p.Contains(e.Location));
+            //int num = m_lstCacheRect.FindIndex((Rectangle p) => p.Contains(e.Location));
+            //int num2 = m_listStringRect.FindIndex((RectangleF p) => p.Contains(e.Location));
             
-            if (num >= 0)
-            {
-                StepIndex = num + 1;
+            //if (num >= 0)
+            //{
+            //    StepIndex = num + 1;
                 
-            }
-            if (num2 >= 0)
-            {
-                StepIndex = num2 + 1;
-            }
+            //}
+            //if (num2 >= 0)
+            //{
+            //    StepIndex = num2 + 1;
+            //}
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -257,7 +259,7 @@ namespace UI
             }
 
             int num4 = 20;
-            num4 = (base.Height - m_steps.Length - m_steps.Length * m_stepWidth - num3 - num2) / (m_steps.Length - 1);
+            num4 = (base.Height - m_steps.Length - m_steps.Length * m_stepWidth - num3 - num2) / (m_steps.Length);
             if (num4 < 20)
             {
                 num4 = 20;
@@ -352,6 +354,10 @@ namespace UI
             base.Name = "UCStep";
             base.Size = new System.Drawing.Size(239, 80);
             ResumeLayout(false);
+        }
+        public void ChangeNowProgress(int index, int value)
+        {
+            hopeRoundProgressBars[index].ValueNumber = value;
         }
 
     }

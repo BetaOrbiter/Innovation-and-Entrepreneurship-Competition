@@ -24,12 +24,14 @@ namespace UI.TestPage
         private List<string> configurationGPUModel;
         private List<string> terminalDiskModels;
         private List<string> configurationDiskModels;
-
         private RTCTestControl rtcTextControl;
         private ModelsCheckControl cpuCheckControl;
         private ModelsCheckControl memoryCheckControl;
         private ModelsCheckControl gpuCheckControl;
         private ModelsCheckControl diskCheckControl;
+        private DiskSmartControl diskSmartControl;
+        private List<Tuple<string, int, int, int, int, bool>> diskSmarts;
+
         public DateTime TerminalTime
         {
             get
@@ -120,7 +122,7 @@ namespace UI.TestPage
                 gpuCheckControl.TerminalModels = this.terminalGPUModel;
                 gpuCheckControl.ConfigurationModels = this.configurationGPUModel;
                 gpuCheckControl.Dock = DockStyle.Top;
-                gpuCheckControl.Size = new(this.Width, 100);
+                gpuCheckControl.Size = new(this.Width, 50 + 55 * Math.Max(terminalGPUModel.Count, configurationCPUModel.Count));
                 gpuCheckControl.Parent = this;
                 gpuCheckControl.Show();
                 Refresh();
@@ -152,7 +154,7 @@ namespace UI.TestPage
                 diskCheckControl.TerminalModels = terminalDiskModels;
                 diskCheckControl.ConfigurationModels = configurationDiskModels;
                 diskCheckControl.Dock = DockStyle.Top;
-                diskCheckControl.Size = new(this.Width, 50 * terminalMemoryModels.Count + 50);
+                diskCheckControl.Size = new(this.Width, 55 * Math.Max(terminalMemoryModels.Count,configurationDiskModels.Count) + 50);
                 diskCheckControl.Parent = this;
                 diskCheckControl.Show();
 
@@ -186,92 +188,148 @@ namespace UI.TestPage
                 memoryCheckControl.TerminalModels = terminalMemoryModels;
                 memoryCheckControl.ConfigurationModels = configurationMemoryModels;
                 memoryCheckControl.Dock = DockStyle.Top;
-                memoryCheckControl.Size = new(this.Width, 50 * terminalMemoryModels.Count + 50);
+                memoryCheckControl.Size = new(this.Width, 55 * Math.Max(terminalMemoryModels.Count, configurationMemoryModels.Count) + 50);
                 memoryCheckControl.Parent = this;
                 memoryCheckControl.Show();
                 Invalidate();
             }
         }
 
-        
+        private List<Tuple<string, int, int, int, int, bool>> DiskSmarts
+        {
+            get
+            {
+                return diskSmarts;
+            }
+            set
+            {
+                diskSmarts = value;
+                diskSmartControl = new();
+                diskSmartControl.Dock = DockStyle.Top;
+                diskSmartControl.Disks = diskSmarts;
+                diskSmartControl.Size = new(this.Width, 55 * diskSmarts.Count+50 );
+                diskSmartControl.Parent = this;
+                diskSmartControl.Show();
+            }
+        }
         public ConfigurationCheck()
         {
             InitializeComponent();
-            
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
-        public void Work(int step,List<string> actualInfos, List<string> expectedInfos,bool flag)
+        public void RTCWork(DateTime _serverTime,DateTime _terminalTime,bool flag)
         {
-            if (InvokeRequired)
+            if (this.InvokeRequired)
             {
-                this.Invoke(Work, step, actualInfos, expectedInfos, flag);
+                this.Invoke(RTCWork, _serverTime, _terminalTime,flag);
             }
             else
             {
-                SetControlInit(actualInfos, expectedInfos, step);
-                if (!flag) Warning(step);
-                else Access(step);
+                TerminalTime = _terminalTime;
+                ConfigurationTime = _serverTime;
+                if (!flag) Warning(0);
+                else Access(0);
             }
         }
-        private void SetControlInit(List<string> actualInfos, List<string> expectedInfos, int step)
+        public void Work(Controller.TestType testType, List<string> actualInfos, List<string> expectedInfos,bool flag)
         {
-            switch (step)
+            if (InvokeRequired)
             {
-                case 1:
+                this.Invoke(Work, testType, actualInfos, expectedInfos, flag);
+            }
+            else
+            {
+                SetControlInit(testType,actualInfos, expectedInfos);
+                if (!flag) Warning(testType);
+                else Access(testType);
+            }
+        }
+        public void DiskSmartWork(List<Tuple<string, int, int, int, int, bool>> _diskSmarts)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(DiskSmartWork, _diskSmarts);
+            }
+            else
+            {
+                DiskSmarts = _diskSmarts;
+            }
+        }
+        private void SetControlInit(Controller.TestType testType,List<string> actualInfos, List<string> expectedInfos)
+        {
+            switch (testType)
+            {
+                case Controller.TestType.CPUConfigCheck:
                     TerminalCPUModel = actualInfos;
                     ConfigurationCPUModel = expectedInfos;
                     break;
-                case 2:
+                case Controller.TestType.MemoryConfigCheck:
                     TerminalMemoryModels = actualInfos;
                     ConfigurationMemoryModels = expectedInfos;
                     break;
-                case 3:
+                case Controller.TestType.GPUConfigCheck:
                     TerminalGPUModel = actualInfos;
                     ConfigurationGPUModel = expectedInfos;
                     break;
-                case 4:
+                case Controller.TestType.DiskConfigCheck:
                     TerminalDiskModels = actualInfos;
                     ConfigurationDiskModels = expectedInfos;
                     break;
             }
         }
-        private void Warning(int step)
+        private void Warning(Controller.TestType testType)
         {
-            string testName="硬件";
-            switch (step)
+            string testName="";
+            switch (testType)
             {
-                case 1:
+                case Controller.TestType.RTCTest:
+                    rtcTextControl.Flag = false;
+                     break;
+                case Controller.TestType.CPUConfigCheck:
                     cpuCheckControl.Flag = false;
                     testName = "CPU";
                     break;
-                case 2:
+                case Controller.TestType.MemoryConfigCheck:
                     memoryCheckControl.Flag = false;
                     testName = "内存";
                     break;
-                case 3:
+                case Controller.TestType.GPUConfigCheck:
                     gpuCheckControl.Flag = false;
                     testName = "显卡";
                     break;
-                case 4:
+                case Controller.TestType.DiskConfigCheck:
                     diskCheckControl.Flag = false;
                     testName = "硬盘";
                     break;
             }
-            MessageBox.Show("本机"+testName+"与配置文件不符！", "错误", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
-        }
-        private void Access(int step)
-        {
-            switch (step)
+            if (Controller.TestType.RTCTest == 0)
             {
-                case 1:
+                MessageBox.Show("终端时间与服务端不一致！", "错误", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("本机" + testName + "与配置文件不符！", "错误", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+            }
+        }
+        private void Access(Controller.TestType testType)
+        {
+            switch (testType)
+            {
+                case Controller.TestType.RTCTest:
+                    rtcTextControl.Flag = true;
+                    break;
+                case Controller.TestType.CPUConfigCheck:
                     cpuCheckControl.Flag = true;
                     break;
-                case 2:
+                case Controller.TestType.MemoryConfigCheck:
                     memoryCheckControl.Flag = true;
                     break;
-                case 3:
+                case Controller.TestType.GPUConfigCheck:
                     gpuCheckControl.Flag = true;
                     break;
-                case 4:
+                case Controller.TestType.DiskConfigCheck:
                     diskCheckControl.Flag = true;
                     break;
             }

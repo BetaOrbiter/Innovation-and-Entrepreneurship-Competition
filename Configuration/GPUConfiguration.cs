@@ -8,5 +8,7 @@ namespace Profile
 
         [JsonProperty(PropertyName = "name")]
         public IList<string> Names { get; set; }
+
+        private GPUConfiguration() { }
     }
 }

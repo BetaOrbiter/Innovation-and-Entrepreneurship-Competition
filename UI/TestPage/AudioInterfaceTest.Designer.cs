@@ -31,11 +31,11 @@
             this.audioPictureBox = new System.Windows.Forms.PictureBox();
             this.microphonePictureBox = new System.Windows.Forms.PictureBox();
             this.myDockLayout = new UI.MyDockLayout();
-            this.progressBar = new ReaLTaiizor.Controls.AloneProgressBar();
             this.myDockLayout1 = new UI.MyDockLayout();
+            this.bigLabel2 = new ReaLTaiizor.Controls.BigLabel();
+            this.bigLabel1 = new ReaLTaiizor.Controls.BigLabel();
             this.audioPicture = new System.Windows.Forms.PictureBox();
             this.microphonePicture = new System.Windows.Forms.PictureBox();
-            this.titleLabel = new ReaLTaiizor.Controls.BigLabel();
             ((System.ComponentModel.ISupportInitialize)(this.audioPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.microphonePictureBox)).BeginInit();
             this.myDockLayout.SuspendLayout();
@@ -47,11 +47,10 @@
             // audioPictureBox
             // 
             this.audioPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.audioPictureBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.audioPictureBox.Location = new System.Drawing.Point(134, 3);
+            this.audioPictureBox.Location = new System.Drawing.Point(134, 29);
             this.audioPictureBox.Name = "audioPictureBox";
-            this.audioPictureBox.Size = new System.Drawing.Size(469, 248);
-            this.audioPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.audioPictureBox.Size = new System.Drawing.Size(469, 225);
+            this.audioPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.audioPictureBox.TabIndex = 0;
             this.audioPictureBox.TabStop = false;
             this.audioPictureBox.Click += new System.EventHandler(this.audioPictureBox_Click);
@@ -59,19 +58,16 @@
             // microphonePictureBox
             // 
             this.microphonePictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.microphonePictureBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.microphonePictureBox.Location = new System.Drawing.Point(3, 236);
+            this.microphonePictureBox.Location = new System.Drawing.Point(3, 290);
             this.microphonePictureBox.Name = "microphonePictureBox";
-            this.microphonePictureBox.Size = new System.Drawing.Size(469, 257);
-            this.microphonePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.microphonePictureBox.Size = new System.Drawing.Size(481, 225);
+            this.microphonePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.microphonePictureBox.TabIndex = 1;
             this.microphonePictureBox.TabStop = false;
             // 
             // myDockLayout
             // 
-            this.myDockLayout.Controls.Add(this.progressBar);
             this.myDockLayout.Controls.Add(this.myDockLayout1);
-            this.myDockLayout.Controls.Add(this.titleLabel);
             this.myDockLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.myDockLayout.DockFlags = new int[] {
         0,
@@ -87,24 +83,10 @@
             this.myDockLayout.Size = new System.Drawing.Size(612, 522);
             this.myDockLayout.TabIndex = 2;
             // 
-            // progressBar
-            // 
-            this.progressBar.BackColor = System.Drawing.SystemColors.Control;
-            this.progressBar.BackgroundColor = System.Drawing.Color.Green;
-            this.progressBar.BorderColor = System.Drawing.Color.DodgerBlue;
-            this.progressBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.progressBar.Location = new System.Drawing.Point(0, 20);
-            this.progressBar.Maximum = 100;
-            this.progressBar.Minimum = 0;
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(612, 10);
-            this.progressBar.Stripes = System.Drawing.Color.DarkGreen;
-            this.progressBar.TabIndex = 7;
-            this.progressBar.Text = "aloneProgressBar1";
-            this.progressBar.Value = 50;
-            // 
             // myDockLayout1
             // 
+            this.myDockLayout1.Controls.Add(this.bigLabel2);
+            this.myDockLayout1.Controls.Add(this.bigLabel1);
             this.myDockLayout1.Controls.Add(this.audioPictureBox);
             this.myDockLayout1.Controls.Add(this.audioPicture);
             this.myDockLayout1.Controls.Add(this.microphonePicture);
@@ -119,19 +101,42 @@
         1,
         1,
         0};
-            this.myDockLayout1.Location = new System.Drawing.Point(3, 23);
+            this.myDockLayout1.Location = new System.Drawing.Point(3, 3);
             this.myDockLayout1.Name = "myDockLayout1";
-            this.myDockLayout1.Size = new System.Drawing.Size(606, 496);
+            this.myDockLayout1.Size = new System.Drawing.Size(606, 516);
             this.myDockLayout1.TabIndex = 6;
+            // 
+            // bigLabel2
+            // 
+            this.bigLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.bigLabel2.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.bigLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.bigLabel2.Location = new System.Drawing.Point(134, 3);
+            this.bigLabel2.Name = "bigLabel2";
+            this.bigLabel2.Size = new System.Drawing.Size(472, 23);
+            this.bigLabel2.TabIndex = 5;
+            this.bigLabel2.Text = "扬声器音频波形";
+            this.bigLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // bigLabel1
+            // 
+            this.bigLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.bigLabel1.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.bigLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.bigLabel1.Location = new System.Drawing.Point(3, 262);
+            this.bigLabel1.Name = "bigLabel1";
+            this.bigLabel1.Size = new System.Drawing.Size(472, 23);
+            this.bigLabel1.TabIndex = 4;
+            this.bigLabel1.Text = "麦克风音频波形";
+            this.bigLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // audioPicture
             // 
             this.audioPicture.BackgroundImage = global::UI.Properties.Resources.Speakers;
             this.audioPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.audioPicture.Dock = System.Windows.Forms.DockStyle.Left;
             this.audioPicture.Location = new System.Drawing.Point(3, 3);
             this.audioPicture.Name = "audioPicture";
-            this.audioPicture.Size = new System.Drawing.Size(125, 227);
+            this.audioPicture.Size = new System.Drawing.Size(125, 256);
             this.audioPicture.TabIndex = 2;
             this.audioPicture.TabStop = false;
             // 
@@ -139,25 +144,11 @@
             // 
             this.microphonePicture.BackgroundImage = global::UI.Properties.Resources.Microphone;
             this.microphonePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.microphonePicture.Dock = System.Windows.Forms.DockStyle.Right;
-            this.microphonePicture.Location = new System.Drawing.Point(478, 257);
+            this.microphonePicture.Location = new System.Drawing.Point(484, 262);
             this.microphonePicture.Name = "microphonePicture";
-            this.microphonePicture.Size = new System.Drawing.Size(125, 236);
+            this.microphonePicture.Size = new System.Drawing.Size(125, 256);
             this.microphonePicture.TabIndex = 3;
             this.microphonePicture.TabStop = false;
-            // 
-            // titleLabel
-            // 
-            this.titleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.titleLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.titleLabel.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.titleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.titleLabel.Location = new System.Drawing.Point(3, 0);
-            this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(606, 20);
-            this.titleLabel.TabIndex = 4;
-            this.titleLabel.Text = "bigLabel1";
-            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AudioInterfaceTest
             // 
@@ -183,8 +174,8 @@
         private MyDockLayout myDockLayout;
         private PictureBox microphonePicture;
         private PictureBox audioPicture;
-        private ReaLTaiizor.Controls.BigLabel titleLabel;
         private MyDockLayout myDockLayout1;
-        private ReaLTaiizor.Controls.AloneProgressBar progressBar;
+        private ReaLTaiizor.Controls.BigLabel bigLabel1;
+        private ReaLTaiizor.Controls.BigLabel bigLabel2;
     }
 }

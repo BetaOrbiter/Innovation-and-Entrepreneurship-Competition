@@ -1,28 +1,37 @@
 {
   "version": "0.1",
   "id": 1,
-  "remoteIP": "192.168.31.141",
+  "remoteIP": "127.0.0.1",
   "logPort": 13006,
   "rtcPort": 13005,
 
-  "logFileName": "log.txt",
-  "cpu_burnerPath": "",
-  "memory_burnerPath": "c:/code/服务外包创新大赛/x64/memeory_burner.exe",
-  "diskspdPath": "c:/code/服务外包创新大赛/x64/diskspd.exe",
+  "logFileName": "C:\\Users\\刘星辰\\Desktop\\log\\log.txt",
+  "cpu_burnerPath": "C:\\Users\\刘星辰\\Desktop\\服创大赛\\x64\\Debug\\cpu_burner.exe",
+  "memory_burnerPath": "C:\\Users\\刘星辰\\Desktop\\服创大赛\\x64\\Debug\\memory_burner.exe",
+  "diskspdPath": "C:\\Users\\刘星辰\\Desktop\\服创大赛\\x64\\Debug\\diskspd.exe",
   "rtcTolerance": 5,
+  "cpuStressTime": 30,
+  "memoryStressTime": 30,
+  "diskStressTime": 30,
+
+  "quickCpuStressTime": 15,
+  "quickMemoryStressTime": 15,
+  "quickDiskStressTime": 15,
+
 
   "usbNumber": 3,
+  "serialNumber": 3,
   "CPUConfig": {
     "num": 1,
     "name": [
-      "Intel(R) Core(TM) i5-9300H CPU @ 2.40GHz"
+      "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz"
     ]
   },
   "memoryConfig": {
     "num": 2,
     "name": [
-      "KHX2666C15S4/8G     ",
-      "HMA81GS6JJR8N-VK    "
+      "M471A1K43CB1-CTD",
+      "M471A1K43CB1-CTD"
     ],
     "size": [
       8589934592,
@@ -30,16 +39,16 @@
     ]
   },
   "driveConfig": {
-    "num": 1,
+    "num": 2,
     "name": [
-      "KBG40ZNS512G NVMe TOSHIBA 512GB"
+      "Samsung SSD 870 EVO 500GB",
+      "SAMSUNG MZVLB512HAJQ-000H1"
     ]
   },
   "gpuConfig": {
-    "num": 2,
+    "num": 1,
     "name": [
-      "Intel(R) UHD Graphics 630",
-      "NVIDIA GeForce GTX 1050"
+      "NVIDIA GeForce RTX 2060"
     ]
   }
 }

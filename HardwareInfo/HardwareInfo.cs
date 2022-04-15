@@ -21,7 +21,7 @@ namespace Hardware.Info
             get
             {
                 var shadowList = DriveList.GetRange(0, DriveList.Count);
-                shadowList.RemoveAll(drive => !drive.Name.ToLower().Contains("usb"));
+                shadowList.RemoveAll(drive => drive.Model.ToLower().Contains("usb"));
                 return shadowList;
             }
         }
@@ -35,7 +35,7 @@ namespace Hardware.Info
             get
             {
                 var shadowList = DriveList.GetRange(0, DriveList.Count);
-                shadowList.RemoveAll(drive => drive.Name.ToLower().Contains("usb"));
+                shadowList.RemoveAll(drive => !drive.Model.ToLower().Contains("usb"));
                 return shadowList;
             }
         }

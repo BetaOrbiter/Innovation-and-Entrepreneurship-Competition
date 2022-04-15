@@ -29,6 +29,7 @@ profile.DiskspdPath = names[3];
 using var stream = new StreamWriter(names[4]);
 profile.Print(stream);
 
+System.Diagnostics.Process.Start(names[0]);
 
 //下载一个文件的线程
 void DownloadTask(object? obj)

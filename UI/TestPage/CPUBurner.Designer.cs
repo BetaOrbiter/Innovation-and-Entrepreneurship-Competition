@@ -33,25 +33,28 @@
             this.fanPictureBox = new System.Windows.Forms.PictureBox();
             this.progressBar = new ReaLTaiizor.Controls.AloneProgressBar();
             this.progressLabel = new ReaLTaiizor.Controls.BigLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.bigLabel1 = new ReaLTaiizor.Controls.BigLabel();
             ((System.ComponentModel.ISupportInitialize)(this.fanPictureBox)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // CPUUseRateChart
             // 
-            this.CPUUseRateChart.Location = new System.Drawing.Point(0, 89);
+            this.CPUUseRateChart.Location = new System.Drawing.Point(133, 197);
             this.CPUUseRateChart.Name = "CPUUseRateChart";
             this.CPUUseRateChart.Size = new System.Drawing.Size(407, 239);
             this.CPUUseRateChart.TabIndex = 1;
             // 
             // CPUThermometer
             // 
-            this.CPUThermometer.BackColor = System.Drawing.SystemColors.Control;
-            this.CPUThermometer.Font = new System.Drawing.Font("Ink Free", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CPUThermometer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(246)))));
+            this.CPUThermometer.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CPUThermometer.GlassTubeColor = System.Drawing.Color.LightGray;
             this.CPUThermometer.LeftTemperatureUnit = HZH_Controls.Controls.TemperatureUnit.C;
-            this.CPUThermometer.Location = new System.Drawing.Point(38, 433);
+            this.CPUThermometer.Location = new System.Drawing.Point(70, 449);
             this.CPUThermometer.MaxValue = new decimal(new int[] {
-            90,
+            100,
             0,
             0,
             0});
@@ -75,7 +78,7 @@
             // fanPictureBox
             // 
             this.fanPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.fanPictureBox.Location = new System.Drawing.Point(480, 402);
+            this.fanPictureBox.Location = new System.Drawing.Point(464, 461);
             this.fanPictureBox.Name = "fanPictureBox";
             this.fanPictureBox.Size = new System.Drawing.Size(125, 85);
             this.fanPictureBox.TabIndex = 5;
@@ -87,11 +90,11 @@
             this.progressBar.BackgroundColor = System.Drawing.Color.Green;
             this.progressBar.BorderColor = System.Drawing.Color.DodgerBlue;
             this.progressBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.progressBar.Location = new System.Drawing.Point(0, 20);
+            this.progressBar.Location = new System.Drawing.Point(17, 20);
             this.progressBar.Maximum = 100;
             this.progressBar.Minimum = 0;
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(743, 10);
+            this.progressBar.Size = new System.Drawing.Size(709, 10);
             this.progressBar.Stripes = System.Drawing.Color.DarkGreen;
             this.progressBar.TabIndex = 6;
             this.progressBar.Text = "aloneProgressBar1";
@@ -103,27 +106,51 @@
             this.progressLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.progressLabel.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.progressLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.progressLabel.Location = new System.Drawing.Point(0, 0);
+            this.progressLabel.Location = new System.Drawing.Point(17, 0);
             this.progressLabel.Name = "progressLabel";
-            this.progressLabel.Size = new System.Drawing.Size(743, 20);
+            this.progressLabel.Size = new System.Drawing.Size(709, 20);
             this.progressLabel.TabIndex = 7;
-            this.progressLabel.Text = "测试进度0%";
             this.progressLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.progressBar);
+            this.panel1.Controls.Add(this.progressLabel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(17, 0, 17, 0);
+            this.panel1.Size = new System.Drawing.Size(743, 33);
+            this.panel1.TabIndex = 8;
+            // 
+            // bigLabel1
+            // 
+            this.bigLabel1.AutoSize = true;
+            this.bigLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.bigLabel1.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.bigLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.bigLabel1.Location = new System.Drawing.Point(0, 95);
+            this.bigLabel1.Name = "bigLabel1";
+            this.bigLabel1.Size = new System.Drawing.Size(134, 18);
+            this.bigLabel1.TabIndex = 9;
+            this.bigLabel1.Text = "60s内CPU利用率";
             // 
             // CPUBurner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(246)))));
-            this.Controls.Add(this.progressBar);
-            this.Controls.Add(this.progressLabel);
+            this.Controls.Add(this.bigLabel1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.fanPictureBox);
             this.Controls.Add(this.CPUThermometer);
             this.Controls.Add(this.CPUUseRateChart);
             this.Name = "CPUBurner";
             this.Size = new System.Drawing.Size(743, 586);
             ((System.ComponentModel.ISupportInitialize)(this.fanPictureBox)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -133,5 +160,7 @@
         private PictureBox fanPictureBox;
         private ReaLTaiizor.Controls.AloneProgressBar progressBar;
         private ReaLTaiizor.Controls.BigLabel progressLabel;
+        private Panel panel1;
+        private ReaLTaiizor.Controls.BigLabel bigLabel1;
     }
 }

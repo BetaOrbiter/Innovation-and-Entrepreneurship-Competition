@@ -33,11 +33,10 @@
             this.MainLayout = new UI.MyDockLayout();
             this.testStep = new UI.MyStep();
             this.TitlePanel = new ReaLTaiizor.Controls.NightPanel();
-            this.myClock1 = new UI.MyClock();
-            this.progressLabel = new ReaLTaiizor.Controls.BigLabel();
+            this.testModelLabel = new ReaLTaiizor.Controls.BigLabel();
+            this.myClock = new UI.MyClock();
             this.StopButton = new ReaLTaiizor.Controls.RoyalEllipseButton();
             this.NowTestItem = new ReaLTaiizor.Controls.BigLabel();
-            this.testProgressBar = new UI.MyProgressBar();
             this.testPageCard = new UI.MyCardLayout();
             this.nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
             this.floatBoxMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -66,7 +65,7 @@
             this.BaseForm.Padding = new System.Windows.Forms.Padding(0, 31, 0, 0);
             this.BaseForm.Size = new System.Drawing.Size(1050, 900);
             this.BaseForm.TabIndex = 0;
-            this.BaseForm.Text = "AutoMaticx86";
+            this.BaseForm.Text = "AutoMaticX86";
             this.BaseForm.TextAlignment = UI.MyForm.Alignment.Left;
             this.BaseForm.TitleBarTextColor = System.Drawing.Color.Gainsboro;
             // 
@@ -94,6 +93,7 @@
             // testStep
             // 
             this.testStep.BackColor = System.Drawing.Color.Transparent;
+            this.testStep.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.testStep.Dock = System.Windows.Forms.DockStyle.Left;
             this.testStep.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.testStep.ImgCompleted = null;
@@ -121,11 +121,10 @@
             // 
             // TitlePanel
             // 
-            this.TitlePanel.Controls.Add(this.myClock1);
-            this.TitlePanel.Controls.Add(this.progressLabel);
+            this.TitlePanel.Controls.Add(this.testModelLabel);
+            this.TitlePanel.Controls.Add(this.myClock);
             this.TitlePanel.Controls.Add(this.StopButton);
             this.TitlePanel.Controls.Add(this.NowTestItem);
-            this.TitlePanel.Controls.Add(this.testProgressBar);
             this.TitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TitlePanel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.TitlePanel.LeftSideColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(246)))));
@@ -137,27 +136,26 @@
             this.TitlePanel.Size = new System.Drawing.Size(1050, 130);
             this.TitlePanel.TabIndex = 2;
             // 
-            // myClock1
+            // testModelLabel
             // 
-            this.myClock1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.myClock1.Location = new System.Drawing.Point(0, 0);
-            this.myClock1.Margin = new System.Windows.Forms.Padding(0);
-            this.myClock1.Name = "myClock1";
-            this.myClock1.Size = new System.Drawing.Size(256, 130);
-            this.myClock1.TabIndex = 6;
-            this.myClock1.Text = "myClock1";
+            this.testModelLabel.AutoSize = true;
+            this.testModelLabel.BackColor = System.Drawing.Color.Transparent;
+            this.testModelLabel.Font = new System.Drawing.Font("方正粗黑宋简体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.testModelLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.testModelLabel.Location = new System.Drawing.Point(900, 102);
+            this.testModelLabel.Name = "testModelLabel";
+            this.testModelLabel.Size = new System.Drawing.Size(150, 28);
+            this.testModelLabel.TabIndex = 7;
+            this.testModelLabel.Text = "全面检测模式";
             // 
-            // progressLabel
+            // myClock
             // 
-            this.progressLabel.AutoSize = true;
-            this.progressLabel.BackColor = System.Drawing.Color.Transparent;
-            this.progressLabel.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.progressLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.progressLabel.Location = new System.Drawing.Point(259, 20);
-            this.progressLabel.Name = "progressLabel";
-            this.progressLabel.Size = new System.Drawing.Size(148, 30);
-            this.progressLabel.TabIndex = 5;
-            this.progressLabel.Text = "bigLabel1";
+            this.myClock.Location = new System.Drawing.Point(20, 0);
+            this.myClock.Margin = new System.Windows.Forms.Padding(0);
+            this.myClock.Name = "myClock";
+            this.myClock.Size = new System.Drawing.Size(236, 130);
+            this.myClock.TabIndex = 6;
+            this.myClock.Text = "myClock1";
             // 
             // StopButton
             // 
@@ -165,52 +163,33 @@
             this.StopButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.StopButton.BorderThickness = 3;
             this.StopButton.DrawBorder = true;
-            this.StopButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
+            this.StopButton.Font = new System.Drawing.Font("方正粗黑宋简体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.StopButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.StopButton.HotTrackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(221)))), ((int)(((byte)(221)))));
             this.StopButton.Image = null;
             this.StopButton.LayoutFlags = ReaLTaiizor.Util.RoyalLayoutFlags.ImageBeforeText;
-            this.StopButton.Location = new System.Drawing.Point(1000, 80);
+            this.StopButton.Location = new System.Drawing.Point(931, 24);
             this.StopButton.Name = "StopButton";
             this.StopButton.PressedColor = System.Drawing.Color.IndianRed;
             this.StopButton.PressedForeColor = System.Drawing.Color.Black;
-            this.StopButton.Size = new System.Drawing.Size(50, 50);
+            this.StopButton.Size = new System.Drawing.Size(64, 64);
             this.StopButton.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             this.StopButton.TabIndex = 2;
-            this.StopButton.Text = "开始";
+            this.StopButton.Text = "停止";
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // NowTestItem
             // 
             this.NowTestItem.BackColor = System.Drawing.Color.Transparent;
-            this.NowTestItem.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.NowTestItem.Font = new System.Drawing.Font("方正粗黑宋简体", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NowTestItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.NowTestItem.Location = new System.Drawing.Point(256, 95);
+            this.NowTestItem.Location = new System.Drawing.Point(256, 0);
             this.NowTestItem.Margin = new System.Windows.Forms.Padding(0);
             this.NowTestItem.Name = "NowTestItem";
-            this.NowTestItem.Size = new System.Drawing.Size(741, 35);
+            this.NowTestItem.Size = new System.Drawing.Size(641, 130);
             this.NowTestItem.TabIndex = 4;
-            this.NowTestItem.Text = "bigLabel1";
+            this.NowTestItem.Text = "X86计算机自动测试";
             this.NowTestItem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // testProgressBar
-            // 
-            this.testProgressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(246)))));
-            this.testProgressBar.BaseColor = System.Drawing.Color.LightGray;
-            this.testProgressBar.DarkerProgress = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(148)))), ((int)(((byte)(92)))));
-            this.testProgressBar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.testProgressBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
-            this.testProgressBar.Location = new System.Drawing.Point(432, 0);
-            this.testProgressBar.Margin = new System.Windows.Forms.Padding(0);
-            this.testProgressBar.Maximum = 100;
-            this.testProgressBar.Name = "testProgressBar";
-            this.testProgressBar.Pattern = true;
-            this.testProgressBar.PercentSign = false;
-            this.testProgressBar.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
-            this.testProgressBar.ShowBalloon = true;
-            this.testProgressBar.Size = new System.Drawing.Size(618, 50);
-            this.testProgressBar.TabIndex = 0;
-            this.testProgressBar.Text = "testProgressBar";
-            this.testProgressBar.Value = 0;
             // 
             // testPageCard
             // 
@@ -299,6 +278,7 @@
             this.Text = "AutoMaticx86";
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.BaseForm.ResumeLayout(false);
             this.MainLayout.ResumeLayout(false);
             this.TitlePanel.ResumeLayout(false);
@@ -315,7 +295,6 @@
         private MyDockLayout MainLayout;
         private ReaLTaiizor.Controls.NightPanel TitlePanel;
         private MyCardLayout testPageCard;
-        private MyProgressBar testProgressBar;
         private ReaLTaiizor.Controls.RoyalEllipseButton StopButton;
         private MyStep testStep;
         private ReaLTaiizor.Controls.BigLabel NowTestItem;
@@ -324,7 +303,7 @@
         private NotifyIcon notifyIcon;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem 退出ToolStripMenuItem;
-        private ReaLTaiizor.Controls.BigLabel progressLabel;
-        private MyClock myClock1;
+        private MyClock myClock;
+        private ReaLTaiizor.Controls.BigLabel testModelLabel;
     }
 }

@@ -212,7 +212,7 @@ namespace UI
         {
             SetStyle(ControlStyles.UserPaint | ControlStyles.ResizeRedraw | ControlStyles.SupportsTransparentBackColor | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, value: true);
             DoubleBuffered = true;
-            Font = new Font("Segoe UI", 12f);
+            Font = new Font("宋体", 12f);
             BackColor = Color.White;
             ForeColor = HopeColors.PrimaryColor;
             

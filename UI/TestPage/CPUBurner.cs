@@ -3,18 +3,22 @@ using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using MyTool.Monitor;
+using LiveChartsCore.Kernel.Sketches;
 
 namespace UI.TestPage
 {
     public partial class CPUBurner : UserControl
     {
-        private string CpuModel = ComputerMonitor.CpuMonitorList[0].Name;
+        private string CpuModel;
         private float CpuUseRate, CpuClock;
         private float CpuTemperature, fanSpeed;
-        private int totalDuration { get; set; }
+        private int TotalDuration { get; set; }
         private LineSeries<int> lineSeries { get; set; }
         private System.Threading.Timer timer;
-        private int durationTime;
+        private TimeSpan durationTime;
+        private DateTime timeStart;
+        //记录图表更新次数
+        private int count;
         public string CPUModel
         {
             get
@@ -80,7 +84,7 @@ namespace UI.TestPage
             }
         }
 
-        public int DurationTime
+        public TimeSpan DurationTime
         {
             get
             {
@@ -89,8 +93,9 @@ namespace UI.TestPage
             set
             {
                 durationTime =value;
-                this.progressBar.Value = durationTime * 100 / totalDuration;
-                this.progressLabel.Text = "测试进度" + durationTime * 100 / totalDuration + "%";
+                this.progressBar.Value = (int)durationTime.TotalSeconds * 100 / TotalDuration;
+                this.progressLabel.Text = $"测试进度 {Math.Min(100, (int)durationTime.TotalSeconds * 100 / TotalDuration)} %" +
+                    $"(已运行时间 {durationTime.Hours}:{durationTime.Minutes}:{durationTime.Seconds}) ";
             }
         }
 
@@ -101,24 +106,29 @@ namespace UI.TestPage
         {
             
             InitializeComponent();
-            this.durationTime = 0;
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             CpuMonitor = ComputerMonitor.CpuMonitorList[0];
+            this.bigLabel1.Location = new(10, this.Height / 8);
             CPUUseRateChart.Size = new Size(this.Width - 160, this.Height / 3);
-            CPUUseRateChart.Location = new Point(0, this.Height / 8);
+            CPUUseRateChart.Location = new Point(0, this.Height / 8+5);
             lineSeries = new LineSeries<int>
             {
                 Values = new int[1],
                 Stroke = new SolidColorPaint(SKColors.Blue) { StrokeThickness = 2 },
                 LineSmoothness = 0,
                 GeometryFill = null, // mark
-                GeometryStroke = null // mark
+                GeometryStroke = null, // mark
+                Name="60s内CPU利用率",
+                //LegendShapeSize=100f
             };
-            
             
             CPUUseRateChart.Series = new ISeries[]
             {
                 lineSeries,
             };
+
 
             CPUUseRateChart.XAxes = new List<Axis>{
                 new Axis{
@@ -129,21 +139,20 @@ namespace UI.TestPage
             };
             CPUUseRateChart.YAxes = new List<Axis>{
                 new Axis{
-                  MaxLimit = 100.5,
+                  MaxLimit = 105,
                   MinLimit = 0
                 }
             };
+            //CPUUseRateChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Top;
+            ////CPUUseRateChart.LegendOrientation = LiveChartsCore.Measure.LegendOrientation.Vertical;
+            //CPUUseRateChart.LegendFont = new System.Drawing.Font("宋体", 6);
+            //CPUUseRateChart.LegendTextColor = System.Drawing.Color.FromArgb(255, 80, 80, 80);
+            //CPUUseRateChart.LegendBackColor = System.Drawing.Color.FromArgb(255, 243, 244, 246);
 
 
             CPUThermometer.Location = new Point(250, 550);
             CPUThermometer.Size = new Size(70, 180);
-            CPUThermometer.Value = 50;
-            CpuTemperature = 50;
           
-           
-           
-            //Point(560, 590);
-            
             this.fanPictureBox.Size = new(100, 100);
             this.fanPictureBox.Location = new(310, 360);
             this.fanPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
@@ -157,20 +166,23 @@ namespace UI.TestPage
             }
             else
             {
+                TotalDuration = _totalDuration;
+                timeStart = DateTime.Now;
+                DurationTime = DateTime.Now - DateTime.Now;
+                CPUModel = _CpuModel;
+                count = 0;
                 timer = new System.Threading.Timer(
                  new TimerCallback(OnTimer)
                  , null
                  , 1000
                  , 1000
                );
-                CPUModel = _CpuModel;
-                totalDuration = _totalDuration;
-
+                
             }
         }
         private void OnTimer(object state)
         {
-            if (DurationTime >= totalDuration)
+            if ((int)DurationTime.TotalSeconds >= TotalDuration)
             {
                 Stop();
             }
@@ -206,7 +218,8 @@ namespace UI.TestPage
         }
         
 
-        private void Update(float _CpuUseRate, float _CpuClock, float _temperature,float _fanSpeed)
+        private void Update(float _CpuUseRate, float _CpuClock, 
+            float _temperature,float _fanSpeed)
         {
             if (this.InvokeRequired)
             {
@@ -214,14 +227,14 @@ namespace UI.TestPage
             }
             else
             {
-                DurationTime = durationTime + 1;
-                
+                count++;
+                DurationTime = DateTime.Now - timeStart;
                 FanSpeed = _fanSpeed;
                 CPUUseRate = _CpuUseRate;
                 CPUClock = _CpuClock;
                 CPUTemperature = _temperature;
                 lineSeries.Values = lineSeries.Values!.Append((int)_CpuUseRate).ToList();
-                if (durationTime > 60)
+                if (count > 60)
                 {
                     var Xaxes  = CPUUseRateChart.XAxes.ToList();
                     Xaxes[0].MaxLimit += 1;
@@ -254,7 +267,7 @@ namespace UI.TestPage
                 font = new Font("宋体", 15, FontStyle.Regular);
 
                 stringFormat.LineAlignment = StringAlignment.Far;
-                g.DrawString("  " + CpuModel, font, brush, rectangle, stringFormat);
+                g.DrawString("  " + CpuModel+" ", font, brush, rectangle, stringFormat);
                 //绘制CPU利用率
                 rectangle.Size = new Size(this.Width/2, 150);
                 rectangle.Location = new(0, this.Height - 310);

@@ -73,10 +73,14 @@ namespace UI.TestPage
             this.AutoScroll = true;
             networkPortControl = new NetworkPortControl();
             macAddressControl = new MACAddressControl();
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
         public void NetPortTestWork()
         {
-            NetAdapterMonitor net = ComputerMonitor.NetAdapterMonitorList[3];
+
+            NetAdapterMonitor net = ComputerMonitor.NetAdapterMonitorList[ComputerMonitor.NetAdapterMonitorList.Count - 1];
             net.Update();
             UpdateLoadSpeed((float) net.UploadSpeed!.Value!,(float) net.DownloadSpeed!.Value!);
         }
