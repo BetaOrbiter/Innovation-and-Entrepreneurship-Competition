@@ -156,6 +156,8 @@ namespace UI.TestPage
                 , 1000
                 , 1000
               );
+              if (usbs.Count <= 0)
+                  timer.Change(-1, -1);
             }
         }
         public void SerialPortTestWork(List<string> _serialPorts)
@@ -175,6 +177,9 @@ namespace UI.TestPage
                     , 1000
                     , 1000
                 );
+                if (_serialPorts.Count <= 0)
+                    timer.Change(-1, -1);
+
             }
         }
         private void Init()

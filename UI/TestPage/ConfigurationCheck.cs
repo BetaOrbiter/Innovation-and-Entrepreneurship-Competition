@@ -304,7 +304,7 @@ namespace UI.TestPage
                     testName = "硬盘";
                     break;
             }
-            if (Controller.TestType.RTCTest == 0)
+            if (Controller.TestType.RTCTest == testType)
             {
                 MessageBox.Show("终端时间与服务端不一致！", "错误", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
             }

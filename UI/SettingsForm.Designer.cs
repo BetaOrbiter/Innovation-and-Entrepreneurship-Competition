@@ -110,7 +110,7 @@
             this.MACAddressCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.MACAddressCheck.Checked = true;
             this.MACAddressCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.MACAddressCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.MACAddressCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MACAddressCheck.ForeColor = System.Drawing.Color.Black;
             this.MACAddressCheck.Location = new System.Drawing.Point(592, 435);
             this.MACAddressCheck.Name = "MACAddressCheck";
@@ -132,7 +132,7 @@
             this.DiskBadCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.DiskBadCheck.Checked = true;
             this.DiskBadCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DiskBadCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DiskBadCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DiskBadCheck.ForeColor = System.Drawing.Color.Black;
             this.DiskBadCheck.Location = new System.Drawing.Point(64, 595);
             this.DiskBadCheck.Name = "DiskBadCheck";
@@ -148,11 +148,11 @@
             // 
             this.bigLabel3.AutoSize = true;
             this.bigLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.bigLabel3.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.bigLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.bigLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.bigLabel3.Location = new System.Drawing.Point(702, 756);
             this.bigLabel3.Name = "bigLabel3";
-            this.bigLabel3.Size = new System.Drawing.Size(183, 34);
+            this.bigLabel3.Size = new System.Drawing.Size(182, 32);
             this.bigLabel3.TabIndex = 25;
             this.bigLabel3.Text = "快速检测模式";
             // 
@@ -188,7 +188,7 @@
             this.LeaveTimeLabel.Name = "LeaveTimeLabel";
             this.LeaveTimeLabel.Size = new System.Drawing.Size(152, 26);
             this.LeaveTimeLabel.TabIndex = 23;
-            this.LeaveTimeLabel.Text = "剩余时间60s";
+            this.LeaveTimeLabel.Text = "剩余时间30s";
             // 
             // settingPicture
             // 
@@ -222,7 +222,7 @@
             // ReminderLabel
             // 
             this.ReminderLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(227)))), ((int)(((byte)(171)))));
-            this.ReminderLabel.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ReminderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ReminderLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.ReminderLabel.Location = new System.Drawing.Point(592, 797);
             this.ReminderLabel.Name = "ReminderLabel";
@@ -241,7 +241,7 @@
             this.MemoryBurnerCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.MemoryBurnerCheck.Checked = true;
             this.MemoryBurnerCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.MemoryBurnerCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.MemoryBurnerCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MemoryBurnerCheck.ForeColor = System.Drawing.Color.Black;
             this.MemoryBurnerCheck.Location = new System.Drawing.Point(592, 675);
             this.MemoryBurnerCheck.Name = "MemoryBurnerCheck";
@@ -263,7 +263,7 @@
             this.CPUBurnerCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.CPUBurnerCheck.Checked = true;
             this.CPUBurnerCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CPUBurnerCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CPUBurnerCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CPUBurnerCheck.ForeColor = System.Drawing.Color.Black;
             this.CPUBurnerCheck.Location = new System.Drawing.Point(592, 595);
             this.CPUBurnerCheck.Name = "CPUBurnerCheck";
@@ -285,7 +285,7 @@
             this.DiskBurnerCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.DiskBurnerCheck.Checked = true;
             this.DiskBurnerCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DiskBurnerCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DiskBurnerCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DiskBurnerCheck.ForeColor = System.Drawing.Color.Black;
             this.DiskBurnerCheck.Location = new System.Drawing.Point(592, 515);
             this.DiskBurnerCheck.Name = "DiskBurnerCheck";
@@ -307,7 +307,7 @@
             this.NetworkPortCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.NetworkPortCheck.Checked = true;
             this.NetworkPortCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.NetworkPortCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.NetworkPortCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NetworkPortCheck.ForeColor = System.Drawing.Color.Black;
             this.NetworkPortCheck.Location = new System.Drawing.Point(592, 355);
             this.NetworkPortCheck.Name = "NetworkPortCheck";
@@ -329,7 +329,7 @@
             this.SerialPortCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.SerialPortCheck.Checked = true;
             this.SerialPortCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SerialPortCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SerialPortCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SerialPortCheck.ForeColor = System.Drawing.Color.Black;
             this.SerialPortCheck.Location = new System.Drawing.Point(64, 835);
             this.SerialPortCheck.Name = "SerialPortCheck";
@@ -351,7 +351,7 @@
             this.USBCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.USBCheck.Checked = true;
             this.USBCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.USBCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.USBCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.USBCheck.ForeColor = System.Drawing.Color.Black;
             this.USBCheck.Location = new System.Drawing.Point(64, 755);
             this.USBCheck.Name = "USBCheck";
@@ -373,7 +373,7 @@
             this.AudioInterfaceCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.AudioInterfaceCheck.Checked = true;
             this.AudioInterfaceCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AudioInterfaceCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.AudioInterfaceCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.AudioInterfaceCheck.ForeColor = System.Drawing.Color.Black;
             this.AudioInterfaceCheck.Location = new System.Drawing.Point(64, 675);
             this.AudioInterfaceCheck.Name = "AudioInterfaceCheck";
@@ -395,7 +395,7 @@
             this.DiskSmartCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.DiskSmartCheck.Checked = true;
             this.DiskSmartCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DiskSmartCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DiskSmartCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DiskSmartCheck.ForeColor = System.Drawing.Color.Black;
             this.DiskSmartCheck.Location = new System.Drawing.Point(64, 515);
             this.DiskSmartCheck.Name = "DiskSmartCheck";
@@ -417,7 +417,7 @@
             this.ConfigCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.ConfigCheck.Checked = true;
             this.ConfigCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ConfigCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ConfigCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ConfigCheck.ForeColor = System.Drawing.Color.Black;
             this.ConfigCheck.Location = new System.Drawing.Point(64, 435);
             this.ConfigCheck.Name = "ConfigCheck";
@@ -445,7 +445,7 @@
             // TestItemChooseLabel
             // 
             this.TestItemChooseLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(247)))), ((int)(((byte)(171)))));
-            this.TestItemChooseLabel.Font = new System.Drawing.Font("方正粗黑宋简体", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TestItemChooseLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TestItemChooseLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.TestItemChooseLabel.Location = new System.Drawing.Point(64, 277);
             this.TestItemChooseLabel.Name = "TestItemChooseLabel";
@@ -463,7 +463,7 @@
             this.RTCCheck.CheckboxStyle = ReaLTaiizor.Controls.ParrotCheckBox.Style.iOS;
             this.RTCCheck.Checked = true;
             this.RTCCheck.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.RTCCheck.Font = new System.Drawing.Font("方正粗黑宋简体", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.RTCCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.RTCCheck.ForeColor = System.Drawing.Color.Black;
             this.RTCCheck.Location = new System.Drawing.Point(64, 355);
             this.RTCCheck.Name = "RTCCheck";
@@ -480,13 +480,13 @@
             this.BackLabel.AutoSize = true;
             this.BackLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(227)))), ((int)(((byte)(171)))));
             this.BackLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BackLabel.Font = new System.Drawing.Font("方正粗黑宋简体", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BackLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BackLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.BackLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BackLabel.Location = new System.Drawing.Point(62, 105);
             this.BackLabel.Margin = new System.Windows.Forms.Padding(0);
             this.BackLabel.Name = "BackLabel";
-            this.BackLabel.Size = new System.Drawing.Size(205, 45);
+            this.BackLabel.Size = new System.Drawing.Size(203, 42);
             this.BackLabel.TabIndex = 4;
             this.BackLabel.Text = "返回主页面\r\n";
             this.BackLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -497,11 +497,11 @@
             this.StartLabel.AutoSize = true;
             this.StartLabel.BackColor = System.Drawing.Color.Transparent;
             this.StartLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.StartLabel.Font = new System.Drawing.Font("方正粗黑宋简体", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.StartLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.StartLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.StartLabel.Location = new System.Drawing.Point(887, 203);
             this.StartLabel.Name = "StartLabel";
-            this.StartLabel.Size = new System.Drawing.Size(94, 45);
+            this.StartLabel.Size = new System.Drawing.Size(92, 42);
             this.StartLabel.TabIndex = 3;
             this.StartLabel.Text = "开始";
             this.StartLabel.Click += new System.EventHandler(this.StartLabel_Click);
@@ -518,7 +518,7 @@
             this.TimerBar.InocmpletedColor = System.Drawing.Color.White;
             this.TimerBar.InterpolationType = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
             this.TimerBar.Location = new System.Drawing.Point(30, 211);
-            this.TimerBar.MaxValue = 60;
+            this.TimerBar.MaxValue = 30;
             this.TimerBar.Name = "TimerBar";
             this.TimerBar.PixelOffsetType = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
             this.TimerBar.Positions = ((System.Collections.Generic.List<float>)(resources.GetObject("TimerBar.Positions")));
@@ -527,14 +527,13 @@
             this.TimerBar.Size = new System.Drawing.Size(768, 37);
             this.TimerBar.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             this.TimerBar.TabIndex = 2;
-            this.TimerBar.Text = "111";
             this.TimerBar.TextRenderingType = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             this.TimerBar.Value = 0;
             // 
             // TitleLabel
             // 
             this.TitleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.TitleLabel.Font = new System.Drawing.Font("方正粗黑宋简体", 42F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.TitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 42F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.TitleLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.TitleLabel.Location = new System.Drawing.Point(270, 41);
             this.TitleLabel.Name = "TitleLabel";

@@ -11,9 +11,15 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>False</Optimize>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+    <None Remove="ServerSetting.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ServerSetting.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -21,9 +27,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Content Include="Properties\App.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
 </Project>

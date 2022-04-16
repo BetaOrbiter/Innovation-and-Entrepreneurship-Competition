@@ -10,7 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+    <None Remove="DownderSetting.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DownderSetting.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,16 @@
+{
+  "remoteIp": "127.0.0.1",
+  "mainPort": 13000,
+  "cpuBurnerPort": 13001,
+  "memBurnerPort": 13002,
+  "diskBurnerPort": 13003,
+  "profilePort": 13004,
+
+  "mainName": "main.exe",
+  "cpuBurnerName": "cpu_burner.exe",
+  "memBurnerName": "memory_burner.exe",
+  "diskBurnerName": "diskspd.exe",
+  "profileName": "profile.json",
+
+  "autoExecute": true
+}

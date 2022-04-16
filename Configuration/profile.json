@@ -5,7 +5,7 @@
   "logPort": 13006,
   "rtcPort": 13005,
 
-  "logFileName": "C:\\Users\\刘星辰\\Desktop\\log\\log.txt",
+  "logFileName": "log.txt",
   "cpu_burnerPath": "C:\\Users\\刘星辰\\Desktop\\服创大赛\\x64\\Debug\\cpu_burner.exe",
   "memory_burnerPath": "C:\\Users\\刘星辰\\Desktop\\服创大赛\\x64\\Debug\\memory_burner.exe",
   "diskspdPath": "C:\\Users\\刘星辰\\Desktop\\服创大赛\\x64\\Debug\\diskspd.exe",
@@ -24,7 +24,7 @@
   "CPUConfig": {
     "num": 1,
     "name": [
-      "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz"
+      "Intel(R) Core(TM) i7-9300H CPU @ 2.40GHz"
     ]
   },
   "memoryConfig": {

@@ -1,13 +1,4 @@
 ﻿using Controller;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace UI
 {
@@ -41,8 +32,8 @@ namespace UI
         private void OnTimer(object sender, EventArgs e)
         {
             this.TimerBar.Value += 1;
-            this.LeaveTimeLabel.Text = $"剩余时间{60 - this.TimerBar.Value}s";
-            if (this.TimerBar.Value == 60)
+            this.LeaveTimeLabel.Text = $"剩余时间{30 - this.TimerBar.Value}s";
+            if (this.TimerBar.Value == 30)
             {
                 timer.Stop();
                 timer.Tick -= new EventHandler(OnTimer);//取消事件

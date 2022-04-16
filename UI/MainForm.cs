@@ -1,5 +1,4 @@
 using Controller;
-using System.ComponentModel;
 using UI.Forms;
 using UI.TestPage;
 
@@ -177,15 +176,13 @@ namespace UI
         {
             MessageBoxButtons messageBoxButtons = MessageBoxButtons.OKCancel;
 
-            DialogResult dr = MessageBox.Show("确定要退出吗?", "退出系统", messageBoxButtons);
+            DialogResult dr = MessageBox.Show("确定要退出吗?（仅仅关闭进程）", "退出系统", messageBoxButtons);
             if (dr == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 this.Hide();
             }
-            e.Cancel = false;
-            Application.Exit();
-            
+
         }
         //更新悬浮球和步骤进度
         public void UpdateProgress(TestType testType,int nowProgress,int totalProgress)
@@ -201,7 +198,7 @@ namespace UI
                     this.NowTestItem.Text = "测试结束";
                     this.myFloatBox.Text = "测试结束";
                     this.myClock.Stop();
-                    DialogResult dr =  MessageBox.Show("测试结束！是否退出", "结束", MessageBoxButtons.YesNo);
+                    DialogResult dr =  MessageBox.Show("测试结束！是否退出（关闭后会自动删除文件并发送日志）", "结束", MessageBoxButtons.YesNo);
                     if (dr == DialogResult.Yes)
                     {
                         MyTool.Log.GetInstance().SendToRemote();
@@ -441,6 +438,8 @@ namespace UI
             this.testPageCard.AddCard(diskBurnerPage, "DiskBurner");
             this.testPageCard.ShowCard("DiskBurner");
             this.isBack = false;
+            nowPageStepNum = 0;
+            nowPageStepIndex = 0;
             DiskBurnerWorker.stopSignal = stopSingal;
             DiskBurnerWorker.StepBack += this.StepBack;
             DiskBurnerWorker.InitUI += diskBurnerPage.Work;
@@ -455,6 +454,8 @@ namespace UI
             this.testPageCard.AddCard(CPUBurnerPage, "CPUBurner");
             this.testPageCard.ShowCard("CPUBurner");
             this.isBack = false;
+            nowPageStepNum = 0;
+            nowPageStepIndex = 0;
             CPUBurnerWorker.stopSignal = stopSingal;
             CPUBurnerWorker.StepBack += this.StepBack;
             CPUBurnerWorker.InitUI += CPUBurnerPage.Work;
@@ -471,6 +472,8 @@ namespace UI
             this.testPageCard.AddCard(memoryBurnePage, "MemoryBurner");
             this.testPageCard.ShowCard("MemoryBurner");
             this.isBack = false;
+            nowPageStepNum = 0;
+            nowPageStepIndex = 0;
             MemoryBurnerWorker.stopSignal = stopSingal;
             MemoryBurnerWorker.StepBack += this.StepBack;
             MemoryBurnerWorker.InitUI += memoryBurnePage.Work;
