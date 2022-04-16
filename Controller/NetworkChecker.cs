@@ -31,7 +31,7 @@ namespace Controller
                 {
                     Thread.Sleep(1200);
                     _ = stopSignal.WaitOne();
-                    var reply = ping.Send(IPAddress.Loopback);
+                    var reply = ping.Send(Profile.Configuration.GetInstance().RemoteIP);
                     UpadteNetPortCheckUI();
                     ProgressChanger.Update(TestType.NetworkPortTest, i, 5);
                 }
