@@ -31,7 +31,7 @@ namespace MyTool
 
         private void WriteToFile(LogType type, string message)
         {
-            var line = $"<{DateTime.Now:yyyy:MM:dd:HH:mm:ss}>[{type}]:{message}{Environment.NewLine}";
+            var line = $"[{Environment.MachineName}]:<{DateTime.Now:yyyy:MM:dd:HH:mm:ss}>[{type}]:{message}{Environment.NewLine}";
             lock (uniqueInstance.Value)
             {
                 File.AppendAllText(FileName, line);
