@@ -1,4 +1,5 @@
-﻿using UI.MyControl;
+﻿using Controller;
+using UI.MyControl;
 
 namespace UI.TestPage
 {
@@ -139,14 +140,16 @@ namespace UI.TestPage
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
         }
-        public void USBTestWork(List<Tuple<string, ulong>> usbs)
+        public void USBTestWork(List<Tuple<string, ulong>> usbs,bool flag)
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(USBTestWork, usbs);
+                this.Invoke(USBTestWork, usbs,flag);
             }
             else
             {
+                if(!flag)
+                    Warning(TestType.USBTest);
                 this.USBS = usbs;
                 timeStart = DateTime.Now;
                 DurationTime = DateTime.Now - DateTime.Now;
@@ -160,14 +163,16 @@ namespace UI.TestPage
                   timer.Change(-1, -1);
             }
         }
-        public void SerialPortTestWork(List<string> _serialPorts)
+        public void SerialPortTestWork(List<string> _serialPorts,bool flag)
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(SerialPortTestWork, _serialPorts);
+                this.Invoke(SerialPortTestWork, _serialPorts,flag);
             }
             else
             {
+                if (!flag)
+                    Warning(TestType.SerialPortTest);
                 this.SerialPorts = _serialPorts;
                 timeStart = DateTime.Now;
                 DurationTime = DateTime.Now - DateTime.Now;
@@ -278,6 +283,15 @@ namespace UI.TestPage
                     usbControls[i].Status = 1;
                 usbControls[i].Show();
             }
+        }
+        private void Warning(TestType testType)
+        {
+            string test = (testType == TestType.USBTest ? "USB数量检测未通过！": "串口数量检测未通过！");
+            var dr = MessageBox.Show(test + "是否中止并排查故障", "错误", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (dr == DialogResult.Yes)
+                System.Environment.Exit(0);
+
+
         }
         protected override void OnPaint(PaintEventArgs e)
         {

@@ -5,9 +5,9 @@ namespace Controller
 {
     public static class USBAndSerialPortChecker
     {
-        public static Action<List<Tuple<string,ulong>>> InitUSBUI;
+        public static Action<List<Tuple<string,ulong>>,bool> InitUSBUI;
 
-        public static Action<List<string>> InitSerialPortUI;
+        public static Action<List<string>,bool> InitSerialPortUI;
 
         public static Action<bool> UpdateProgressUI;
 
@@ -31,7 +31,7 @@ namespace Controller
                 //获取物理U盘
                 GetUSBVolumes();
                 //if (Profile.Configuration.GetInstance().UsbNumber == usbNumber) ;
-                InitUSBUI(entityUsb);
+                InitUSBUI(entityUsb, entityUsb.Count == Profile.Configuration.GetInstance().UsbNumber);
                 int index = 0;
                 //开始测试
                 if (usbVolumes.Count > 0)
@@ -54,9 +54,9 @@ namespace Controller
             {
                 //获取串口
                 GetSerialPort();
-                //if (Profile.Configuration.GetInstance().SerialPortNumber == serialPortNames.Count) ;
+                //if (Profile.Configuration.GetInstance().SerialPortNumber == serialPortNames.Count);
 
-                InitSerialPortUI(serialPortNames);
+                InitSerialPortUI(serialPortNames,serialPortNames.Count==Profile.Configuration.GetInstance().SerialPortNumber);
                 int index = 0;
                 if (serialPortNames.Count > 0)
                     ProgressChanger.Update(TestType.SerialPortTest, index, serialPortNames.Count);
