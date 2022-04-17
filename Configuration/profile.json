@@ -1,7 +1,7 @@
 {
   "version": "0.1",
   "id": 1,
-  "remoteIP": "127.0.0.1",
+  "remoteIP": "192.168.43.221",
   "logPort": 13006,
   "rtcPort": 13005,
 
@@ -24,7 +24,7 @@
   "CPUConfig": {
     "num": 1,
     "name": [
-      "Intel(R) Core(TM) i7-9300H CPU @ 2.40GHz"
+      "Intel(R) Core(TM) i7-9750H CPU @ 2.40GHz"
     ]
   },
   "memoryConfig": {

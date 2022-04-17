@@ -34,6 +34,8 @@ namespace Controller
                 InitUSBUI(entityUsb);
                 int index = 0;
                 //开始测试
+                if (usbVolumes.Count > 0)
+                    ProgressChanger.Update(TestType.USBTest, index, usbVolumes.Count);
                 foreach (var usbVolume in usbVolumes)
                 {
                     var flag = UsbPortCheck(usbVolume);
@@ -56,6 +58,8 @@ namespace Controller
 
                 InitSerialPortUI(serialPortNames);
                 int index = 0;
+                if (serialPortNames.Count > 0)
+                    ProgressChanger.Update(TestType.SerialPortTest, index, serialPortNames.Count);
                 //开始测试
                 foreach (var serialPortName in serialPortNames)
                 {
