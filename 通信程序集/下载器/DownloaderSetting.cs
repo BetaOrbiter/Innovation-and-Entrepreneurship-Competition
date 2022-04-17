@@ -40,7 +40,7 @@ namespace 下载器
         [JsonProperty(PropertyName = "autoExecute")]
         public bool AutoExecute { get; set; }
 
-        public static DownloaderSetting uniqueInstance = JsonConvert.DeserializeObject<DownloaderSetting>(File.ReadAllText("DownderSetting.json"));
+        public static DownloaderSetting uniqueInstance = JsonConvert.DeserializeObject<DownloaderSetting>(File.ReadAllText("DownloaderSetting.json"));
 
         public static DownloaderSetting GetInstance() => uniqueInstance;
     }
