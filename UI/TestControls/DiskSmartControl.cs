@@ -88,9 +88,7 @@
         }
         private void Warning(int index)
         {
-            var dr = MessageBox.Show($"硬盘{index}Smart传感器信息报错！是否中止排查故障", "错误", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-            if (dr == DialogResult.Yes)
-                System.Environment.Exit(0);
+            MessageBox.Show($"硬盘{index}Smart传感器信息报错！", "错误", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
         }
     }
 }

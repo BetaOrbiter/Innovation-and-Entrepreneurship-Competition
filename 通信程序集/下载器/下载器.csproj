@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="DownderSetting.json" />
+    <None Remove="DownloaderSetting.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="DownderSetting.json">
+    <Content Include="DownloaderSetting.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

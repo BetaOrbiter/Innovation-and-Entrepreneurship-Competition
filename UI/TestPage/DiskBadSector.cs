@@ -155,11 +155,9 @@ namespace UI.TestPage
                 }
                 else
                 {
-                    var dr=MessageBox.Show($"硬盘{nowDiskIndex+1}出现坏道！是否中止并排查故障", "错误", 
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    MessageBox.Show($"硬盘{nowDiskIndex+1}出现坏道！", "错误", 
+                    MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
                     badDiskControls[nowDiskIndex].Status = 3;
-                    if (dr == DialogResult.Yes)
-                        System.Environment.Exit(0);
                 }
                 if (nowDiskIndex >= diskCount - 1) 
                 {

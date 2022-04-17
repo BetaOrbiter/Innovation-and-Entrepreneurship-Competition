@@ -306,15 +306,11 @@ namespace UI.TestPage
             }
             if (Controller.TestType.RTCTest == testType)
             {
-                var dr= MessageBox.Show("终端时间与服务端不一致！是否中止并排查故障", "错误", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                if (dr == DialogResult.Yes)
-                    System.Environment.Exit(0);
+                MessageBox.Show("终端时间与服务端不一致！", "错误", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
             }
             else
             {
-                var dr = MessageBox.Show("本机" + testName + "与配置文件不符！是否中止并排查故障", "错误", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                if (dr == DialogResult.Yes)
-                    System.Environment.Exit(0);
+                MessageBox.Show("本机" + testName + "与配置文件不符！", "错误", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
             }
         }
         private void Access(Controller.TestType testType)

@@ -17,7 +17,6 @@ namespace UI.TestPage
         private System.Threading.Timer timer;
         private TimeSpan durationTime;
         private DateTime timeStart;
-        private int tmpExceedCount;
         //记录图表更新次数
         private int count;
         public string CPUModel
@@ -172,7 +171,6 @@ namespace UI.TestPage
                 DurationTime = DateTime.Now - DateTime.Now;
                 CPUModel = _CpuModel;
                 count = 0;
-                tmpExceedCount = 0;
                 timer = new System.Threading.Timer(
                  new TimerCallback(OnTimer)
                  , null
@@ -197,10 +195,7 @@ namespace UI.TestPage
                 {
                     maxColock = MathF.Max(maxColock, (float)cpuClocks!.Value!);
                 }
-                float temperature = (float)CpuMonitor.MaxTemperature!.Value!;
-                if (temperature > 90) tmpExceedCount++;
-                else tmpExceedCount = 0;
-                if (tmpExceedCount >= 60) Warning();
+
                 Update(
                     (float)CpuMonitor.Usage!.Value!,
                     maxColock / 1000f,
@@ -210,7 +205,7 @@ namespace UI.TestPage
             }
 
         }
-        public void Stop()
+        private void Stop()
         {
             if (this.InvokeRequired)
             {
@@ -222,6 +217,7 @@ namespace UI.TestPage
             }
         }
         
+
         private void Update(float _CpuUseRate, float _CpuClock, 
             float _temperature,float _fanSpeed)
         {
@@ -248,14 +244,6 @@ namespace UI.TestPage
                 
                 CPUUseRateChart.Update();
             }
-        }
-
-        private void Warning()
-        {
-            var dr = MessageBox.Show($"CPU温度连续60s超过90℃！是否中止并排查故障", "错误",
-                   MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-            if (dr == DialogResult.Yes)
-                System.Environment.Exit(0);
         }
         protected override void OnPaint(PaintEventArgs e)
         {

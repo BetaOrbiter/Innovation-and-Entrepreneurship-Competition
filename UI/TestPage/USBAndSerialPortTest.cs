@@ -227,11 +227,9 @@ namespace UI.TestPage
                 }
                 else
                 {
-                    var dr= MessageBox.Show($"{(TestModel == 0 ? "USB接口" : "串口")} { (NowUSBIndex + 1)}发生错误！是否中止并排查错误", 
+                    MessageBox.Show($"{(TestModel == 0 ? "USB接口" : "串口")} { (NowUSBIndex + 1)}发生错误！", 
                         "错误", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
                     usbControls[nowUSBIndex].Status = 3;
-                    if (dr == DialogResult.Yes)
-                        System.Environment.Exit(0);
                 }
                 if (nowUSBIndex >= usbCount - 1)
                 {

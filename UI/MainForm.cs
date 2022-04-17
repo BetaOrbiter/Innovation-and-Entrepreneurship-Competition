@@ -132,20 +132,14 @@ namespace UI
                     case TestType.DiskBurnerTest:
                         if (DiskBurnerWorker.hasStresser)
                             DiskBurnerWorker.Kill();
-                        if (diskBurnerPage != null)
-                            diskBurnerPage.Stop();
                         break;
                     case TestType.CPUBurnerTest:
                         if (CPUBurnerWorker.hasStresser)
                             CPUBurnerWorker.Kill();
-                        if (CPUBurnerPage != null)
-                            CPUBurnerPage.Stop();
                         break;
                     case TestType.MemoryBurnerTest:
                         if (MemoryBurnerWorker.hasStresser)
                             MemoryBurnerWorker.Kill();
-                        if (memoryBurnePage != null)
-                            memoryBurnePage.Stop();
                         break;
 
                 }
@@ -187,10 +181,6 @@ namespace UI
             {
                 e.Cancel = true;
                 this.Hide();
-            }
-            else if (dr == DialogResult.OK)
-            {
-                System.Environment.Exit(0);
             }
 
         }

@@ -198,7 +198,7 @@ namespace UI.TestPage
             }
         }
 
-        public void Stop()
+        private void Stop()
         {
             if (this.InvokeRequired)
             {
